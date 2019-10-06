@@ -1,22 +1,46 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 
-var customerSchema = new Schema({
+const SALT_ROUNDS = 6;
+
+const customerSchema = new Schema({
     name: String,
     username: {
         type: String,
         required: true,
         unique: true
     },
-    email :{
-        type: String, 
-        required: true, 
-        lowercase: true, 
+    email: {
+        type: String,
+        required: true,
+        lowercase: true,
         unique: true
     },
     password: String
 }, {
     timestamps: true
+});
+
+customerSchema.set('toJSON', {
+    transform: function (doc, ret) {
+        // remove the password property when serializing doc to JSON
+        delete ret.password;
+        return ret;
+    }
+});
+
+customerSchema.pre('save', function (next) {
+    // this will be set to the current document
+    const customer = this;
+    if (!customer.isModified('password')) return next();
+    // password has been changed - salt and hash it
+    bcrypt.hash(customer.password, SALT_ROUNDS, function (err, hash) {
+        if (err) return next(err);
+        // replace the customer provided password with the hash
+        customer.password = hash;
+        next();
+    });
 });
 
 modeules.exports = mongoose.model('Customer', customerSchema);
