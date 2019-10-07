@@ -47,7 +47,6 @@ class App extends Component {
         <Route exact path='/' render={() => 
             <section>
               {this.state.restaurant_menus.map((restaurant, idx) =>
-                  <p>{idx}</p>
                   <p>{restaurant.name}</p>
               )}
             
