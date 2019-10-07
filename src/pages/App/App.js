@@ -16,12 +16,18 @@ class App extends Component {
     };
   }
 
+  handleLogout = () => {
+    customerService.logout();
+    this.setState({customer: null});
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <NavBar 
             customer={this.state.customer}
+            handleLogout={this.handleLogout}
           />
         </header>
 

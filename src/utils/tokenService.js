@@ -25,8 +25,13 @@ function getCustomerFromToken() {
     return token ? JSON.parse(atob(token.split('.')[1])).customer : null;
 }
 
+function removeToken() {
+    localStorage.removeItem('token');
+}
+
 export default {
     setToken,
     getToken,
-    getCustomerFromToken
+    getCustomerFromToken,
+    removeToken
 };

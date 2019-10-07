@@ -21,7 +21,12 @@ function getCustomer() {
   return tokenService.getCustomerFromToken();
 }
 
+function logout() {
+  tokenService.removeToken();
+}
+
 export default {
   signup,
   getCustomer,
+  logout
 };
