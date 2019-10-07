@@ -43,7 +43,11 @@ customerSchema.pre('save', function (next) {
 });
 
 customerSchema.methods.comparePassword = function (tryPassword, cb) {
-    bcrypt.compare(tryPassword, this.password, cb);
+    // 'this' represents the document that you called comparePassword on
+    bcrypt.compare(tryPassword, this.password, function (err, isMatch) {
+        if (err) return cb(err);
+        cb(null, isMatch);
+    });
 };
 
 module.exports = mongoose.model('Customer', customerSchema);
