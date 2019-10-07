@@ -7,6 +7,7 @@ class SignupForm extends Component {
   state = {
     name: '',
     username: '',
+    phone: '',
     email: '',
     password: '',
     passwordConf: ''
@@ -52,6 +53,11 @@ class SignupForm extends Component {
           <div className="form-group">
             <div className="col-sm-12">
               <input type="text" className="form-control" placeholder="Username" value={this.state.username} name="username" onChange={this.handleChange} />
+            </div>
+          </div>
+          <div className="form-group">
+            <div className="col-sm-12">
+              <input type="text" className="form-control" placeholder="Phone Number" pattern="[0-9]{10}" value={this.state.phone} name="phone" onChange={this.handleChange} />
             </div>
           </div>
           <div className="form-group">

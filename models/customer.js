@@ -27,7 +27,7 @@ const customerSchema = new Schema({
         unique: true
     },
     password: String,
-    phone_num: String,
+    phone: String,
     orders: [orderSchema]
 }, {
     timestamps: true
