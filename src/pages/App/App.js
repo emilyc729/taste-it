@@ -5,15 +5,23 @@ import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import NavBar from '../../components/NavBar/NavBar';
 import customerService from '../../utils/customerService';
+import menuApi from '../../services/menus-api';
 
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
+      restaurant_menus: [],
       // Initialize user if there's a token, otherwise null
       customer: customerService.getCustomer()
     };
+  }
+
+  async componentDidMount() {
+    const restaurant_menus = await menuApi.getAllMenus();
+    console.log(restaurant_menus);
+    this.setState({restaurant_menus: restaurant_menus.result});
   }
 
   handleSignupOrLogin = () => {
@@ -36,6 +44,15 @@ class App extends Component {
         </header>
 
         <Switch>
+        <Route exact path='/' render={() => 
+            <section>
+              {this.state.restaurant_menus.map((restaurant, idx) =>
+                  <p>{idx}</p>
+                  <p>{restaurant.name}</p>
+              )}
+            
+            </section>
+          }/>
           <Route exact path='/signup' render={({ history }) =>
             <SignupPage
               history={history}
