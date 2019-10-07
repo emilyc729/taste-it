@@ -42,4 +42,4 @@ customerSchema.pre('save', function (next) {
     });
 });
 
-modeules.exports = mongoose.model('Customer', customerSchema);
+module.exports = mongoose.model('Customer', customerSchema);
