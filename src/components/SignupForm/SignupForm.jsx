@@ -6,6 +6,7 @@ class SignupForm extends Component {
 
   state = {
     name: '',
+    username: '',
     email: '',
     password: '',
     passwordConf: ''
@@ -29,6 +30,7 @@ class SignupForm extends Component {
       this.props.history.push('/');
     } catch (err) {
       // Invalid customer data (probably duplicate email)
+      console.log(err);
       this.props.updateMessage(err.message);
     }
   }
@@ -49,6 +51,11 @@ class SignupForm extends Component {
           </div>
           <div className="form-group">
             <div className="col-sm-12">
+              <input type="text" className="form-control" placeholder="Username" value={this.state.username} name="username" onChange={this.handleChange} />
+            </div>
+          </div>
+          <div className="form-group">
+            <div className="col-sm-12">
               <input type="email" className="form-control" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
             </div>
           </div>
@@ -64,7 +71,7 @@ class SignupForm extends Component {
           </div>
           <div className="form-group">
             <div className="col-sm-12 text-center">
-              <button className="btn btn-default" disabled={this.isFormInvalid()}>Sign Up</button>&nbsp;&nbsp;
+              <button className="btn btn-outline-primary" disabled={this.isFormInvalid()}>Sign Up</button>&nbsp;&nbsp;
               <Link to='/'>Cancel</Link>
             </div>
           </div>

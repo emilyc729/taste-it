@@ -4,6 +4,16 @@ const bcrypt = require('bcrypt');
 
 const SALT_ROUNDS = 6;
 
+const orderSchema = new Schema({
+    restaurant_name: String,
+    order_num: String,
+    total: Number,
+    total_items: Number,
+    food_items: []
+}, {
+    timestamps: true
+});
+
 const customerSchema = new Schema({
     name: String,
     username: {
@@ -16,7 +26,9 @@ const customerSchema = new Schema({
         lowercase: true,
         unique: true
     },
-    password: String
+    password: String,
+    phone_num: String,
+    orders: [orderSchema]
 }, {
     timestamps: true
 });
