@@ -42,4 +42,8 @@ customerSchema.pre('save', function (next) {
     });
 });
 
+customerSchema.methods.comparePassword = function (tryPassword, cb) {
+    bcrypt.compare(tryPassword, this.password, cb);
+};
+
 module.exports = mongoose.model('Customer', customerSchema);

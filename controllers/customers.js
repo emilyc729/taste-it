@@ -2,10 +2,6 @@ const Customer = require('../models/customer');
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
 
-module.exports = {
-  signup
-};
-
 async function signup(req, res) {
   const customer = new Customer(req.body);
   try {
@@ -26,3 +22,25 @@ function createJWT(customer) {
     {expiresIn: '24h'}
   );
 }
+
+async function login(req, res) {
+  try {
+    const customer = await Customer.findOne({email: req.body.email});
+    if (!customer) return res.status(401).json({err: 'bad credentials'});
+    customer.comparePassword(req.body.pw, (err, isMatch) => {
+      if (isMatch) {
+        const token = createJWT(customer);
+        res.json({token});
+      } else {
+        return res.status(401).json({err: 'bad credentials'});
+      }
+    });
+  } catch (err) {
+    return res.status(401).json(err);
+  }
+}
+
+module.exports = {
+  signup,
+  login
+};
