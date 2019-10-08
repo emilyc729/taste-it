@@ -1,17 +1,28 @@
-import React from 'react';
-//import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
 import './MenuPage.css';
 import MenuSidebar from '../../components/MenuSidebar/MenuSidebar';
 import Menu from '../../components/Menu/Menu';
+import ordersApi from '../../services/orders-api';
 
-const MenuPage = (props) => {
-    const menu = props.restaurant ? 
+class MenuPage extends Component {
+    state = {
+        customer_orders: this.props.customer.orders
+    }
+
+    handleCreateOrder() {
+        
+        this.setState({});
+
+    }
+
+    render() {
+        const menu = this.props.restaurant ? 
         <div className="row">
             <div className="col-md-2">
-                <MenuSidebar menus={props.restaurant.menus} />
+                <MenuSidebar menus={this.props.restaurant.menus} />
             </div>
             <div className="col-md-10">
-            {props.restaurant.menus.map((menu, idx) => 
+            {this.props.restaurant.menus.map((menu, idx) => 
                 <div key={idx}>
                 <Menu categories={menu.categories} />
                 </div>
@@ -22,13 +33,12 @@ const MenuPage = (props) => {
         <div>
             Loading...
         </div>
-
-        
-    return (
-        <div className="MenuPage">
-          {menu}
-        </div>
-    );
+        return (
+            <div className="MenuPage">
+            {menu}
+            </div>
+        );
+    }
 };
 
 export default MenuPage;
