@@ -7,9 +7,6 @@ module.exports = {
 };
 
 async function index(req, res) {
-  console.log('--controller---');
-  console.log(req.user);
-
   const customer = await Customer.findById(req.user._id);
   const orders = customer.orders;
   return res.status(200).json(orders);
