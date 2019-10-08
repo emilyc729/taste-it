@@ -7,7 +7,7 @@ const FoodCard = (props) => {
         <div className="container">
             <div className="row">
                 {props.foods.map((food, idx) =>
-                    <div key={food.name} className="col-md-4">
+                    <div key={food.name} className="col-md-6 col-lg-4">
                         <div className="card bg-dark mt-4">
                             <img src={food.food_photo} className="card-img-top" alt={food.description} />
                                 <div className="card-body bg-light">
