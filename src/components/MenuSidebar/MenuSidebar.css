@@ -1,0 +1,9 @@
+.MenuSidebar {
+    position: fixed;
+    padding: 35px 0;
+    padding-left: 15px;
+    margin-top: 5%;
+    
+    top: 0;
+    bottom: 0;
+}

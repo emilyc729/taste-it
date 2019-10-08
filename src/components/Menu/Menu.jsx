@@ -4,7 +4,7 @@ import FoodCard from '../FoodCard/FoodCard';
 
 const Menu = (props) => {
     return (
-        <div className='Menu'>
+        <div className="Menu">
             {props.categories.map((category, idx) =>
                 <div key={category.name}>
                     <h3 className="text-center mt-4" name={category.name}>{category.name}</h3>
