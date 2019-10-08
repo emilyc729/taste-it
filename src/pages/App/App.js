@@ -6,7 +6,8 @@ import LoginPage from '../LoginPage/LoginPage';
 import NavBar from '../../components/NavBar/NavBar';
 import customerService from '../../utils/customerService';
 import menuApi from '../../services/menus-api';
-
+import RestaurantCard from '../../components/RestaurantCard/RestaurantCard';
+import MenuPage from '../MenuPage/MenuPage';
 
 class App extends Component {
   constructor() {
@@ -20,45 +21,56 @@ class App extends Component {
 
   async componentDidMount() {
     const restaurant_menus = await menuApi.getAllMenus();
-    console.log(restaurant_menus);
-    this.setState({restaurant_menus: restaurant_menus.result});
+    console.log(restaurant_menus.result);
+    this.setState({ restaurant_menus: restaurant_menus.result });
   }
 
   handleSignupOrLogin = () => {
-    this.setState({customer: customerService.getCustomer()});
+    this.setState({ customer: customerService.getCustomer() });
   }
 
   handleLogout = () => {
     customerService.logout();
-    this.setState({customer: null});
+    this.setState({ customer: null });
   }
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <NavBar 
+          <NavBar
             customer={this.state.customer}
             handleLogout={this.handleLogout}
           />
         </header>
 
         <Switch>
-        <Route exact path='/' render={() => 
-            <section>
-              {this.state.restaurant_menus.map((restaurant, idx) =>
-                  <p>{restaurant.name}</p>
-              )}
-            
+          <Route exact path='/' render={() =>
+            <section className="container">
+              <div className="row">
+                {this.state.restaurant_menus.map((restaurant, idx) =>
+                  <div key={idx} className="col-md-4">
+                    <RestaurantCard info={restaurant} idx={idx} />
+                  </div>
+                )}
+              </div>
             </section>
-          }/>
+          } />
+          <Route exact path='/restaurant/:id' render={(props) => {
+            let restaurant = this.state.restaurant_menus[props.match.params.id];
+            return <MenuPage
+              {...props}
+              restaurant={restaurant}
+            />
+          }
+          } />
           <Route exact path='/signup' render={({ history }) =>
             <SignupPage
               history={history}
               handleSignupOrLogin={this.handleSignupOrLogin}
             />
           } />
-          <Route exact path='/login' render={({history}) =>
+          <Route exact path='/login' render={({ history }) =>
             <LoginPage
               history={history}
               handleSignupOrLogin={this.handleSignupOrLogin}
@@ -66,6 +78,9 @@ class App extends Component {
           } />
 
         </Switch>
+        <footer className="text-center mt-4 mb-4">
+          Taste-It  <i class="far fa-grin-wink"></i>
+        </footer>
       </div>
     );
   }
