@@ -13,7 +13,7 @@ const NavBar = (props) => {
             <span className="fas fa-utensils"></span>
           </button>
           <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a className="dropdown-item" href="#none">Another action</a>
+            <Link to='/orders' className="dropdown-item">View Orders</Link>
             <div className="dropdown-divider"></div>
             <a className="dropdown-item" href="#none">Something else here</a>
             <Link to='' className="dropdown-item" onClick={props.handleLogout}>LOG OUT</Link>
