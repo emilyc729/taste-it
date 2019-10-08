@@ -8,6 +8,7 @@ import customerService from '../../utils/customerService';
 import menuApi from '../../services/menus-api';
 import RestaurantCard from '../../components/RestaurantCard/RestaurantCard';
 import MenuPage from '../MenuPage/MenuPage';
+import OrderPage from  '../OrderPage/OrderPage';
 
 class App extends Component {
   constructor() {
@@ -15,6 +16,7 @@ class App extends Component {
     this.state = {
       restaurant_menus: [],
       // Initialize user if there's a token, otherwise null
+      order: {},
       customer: customerService.getCustomer()
     };
   }
@@ -61,6 +63,12 @@ class App extends Component {
             return <MenuPage
               {...props}
               restaurant={restaurant}
+            />
+          }
+          } />
+          <Route exact path='/order' render={(props) => {
+            return <OrderPage
+              {...props}
             />
           }
           } />
