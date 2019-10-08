@@ -78,8 +78,8 @@ class App extends Component {
           } />
 
         </Switch>
-        <footer className="text-center mt-4 mb-4">
-          Taste-It  <i class="far fa-grin-wink"></i>
+        <footer className="footer bg-light">
+          Taste-It  <i className="far fa-grin-wink"></i>
         </footer>
       </div>
     );
