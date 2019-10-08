@@ -7,10 +7,10 @@ const MenuSidebar = (props) => {
         <div className='MenuSidebar'>
             {props.menus.map((menu, idx) =>
                 <div key={menu.name}>
-                    {menu.name}
+                    <h4>{menu.name}</h4>
                     {menu.categories.map((category, idx) =>
                         <div key={idx}>
-                            <li href={`#${category.name}`}>{category.name}</li>
+                            <a href={`#${category.name}`}>{category.name}</a>
                         </div>
                     )}
 

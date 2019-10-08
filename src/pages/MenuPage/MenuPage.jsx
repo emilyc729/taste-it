@@ -6,14 +6,17 @@ import Menu from '../../components/Menu/Menu';
 
 const MenuPage = (props) => {
     const menu = props.restaurant ? 
-        <div>
-            <MenuSidebar menus={props.restaurant.menus} />
+        <div className="row">
+            <div className="col-md-2">
+                <MenuSidebar menus={props.restaurant.menus} />
+            </div>
+            <div className="col-md-10">
             {props.restaurant.menus.map((menu, idx) => 
                 <div key={idx}>
                 <Menu categories={menu.categories} />
                 </div>
             )}
-            
+            </div>
         </div>
         :
         <div>
@@ -22,7 +25,7 @@ const MenuPage = (props) => {
 
         
     return (
-        <div>
+        <div className="MenuPage">
           {menu}
         </div>
     );
