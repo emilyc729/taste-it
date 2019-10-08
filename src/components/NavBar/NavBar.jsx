@@ -5,19 +5,47 @@ import './NavBar.css';
 const NavBar = (props) => {
   let nav = props.customer ?
     <div>
-      <Link to='' className='NavBar-link' onClick={props.handleLogout}>LOG OUT</Link>
-      &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <span className='NavBar-welcome'>WELCOME, {props.customer.name}</span>
+
+      <nav className="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
+        <Link to='' className="navbar-brand" href="#navbar">Taste-It</Link>
+        <div className="dropdown">
+          <button className="btn btn-outline-success" id="navbarDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span className="fas fa-utensils"></span>
+          </button>
+          <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a className="dropdown-item" href="#none">Another action</a>
+            <div className="dropdown-divider"></div>
+            <a className="dropdown-item" href="#none">Something else here</a>
+            <Link to='' className="dropdown-item" onClick={props.handleLogout}>LOG OUT</Link>
+          </div>
+        </div>
+      </nav>
     </div>
     :
     <div>
-      <Link to='/login' className='NavBar-link'>LOG IN</Link>
-      &nbsp;&nbsp;|&nbsp;&nbsp;
-      <Link to='/signup' className='NavBar-link'>SIGN UP</Link>
-    </div>;
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <Link to='' className="navbar-brand" href="#navbar">Taste-It</Link>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link to='/login' className='nav-link'>Login</Link>
+            </li>
+            <li className="nav-item">
+              <Link to='/signup' className='nav-link'>Sign Up</Link>
+            </li>
+          </ul>
+
+        </div>
+      </nav>
+    </div>
+
 
   return (
-    <div className='NavBar'>
+    <div className='fixed-top'>
       {nav}
     </div>
   );
