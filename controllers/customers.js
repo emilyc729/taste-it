@@ -24,7 +24,7 @@ function createJWT(customer) {
   return jwt.sign(
     {customer},
     SECRET,
-    {expiresIn: '1h'}
+    {expiresIn: '24h'}
   );
 }
 
