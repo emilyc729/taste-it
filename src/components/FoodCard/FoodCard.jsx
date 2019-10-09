@@ -5,6 +5,7 @@ import './FoodCard.css';
 const FoodCard = (props) => {
     return (
         <div className="container">
+            
             <div className="row">
                 {props.foods.map((food, idx) =>
                     <div key={food.name} className="col-md-6 col-lg-4">
