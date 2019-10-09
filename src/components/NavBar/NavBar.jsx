@@ -7,15 +7,14 @@ const NavBar = (props) => {
     <div>
 
       <nav className="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
-        <Link to='' className="navbar-brand" href="#navbar">Taste-It</Link>
+        <Link to='' className="navbar-brand">Taste-It</Link>
         <div className="dropdown">
           <button className="btn btn-outline-success" id="navbarDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span className="fas fa-utensils"></span>
           </button>
           <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <Link to='/orders' className="dropdown-item">View Orders</Link>
-            <div className="dropdown-divider"></div>
-            <a className="dropdown-item" href="#none">Something else here</a>
+            <Link to='' className="dropdown-item">All Restaurants</Link>
             <Link to='' className="dropdown-item" onClick={props.handleLogout}>LOG OUT</Link>
           </div>
         </div>
