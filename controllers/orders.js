@@ -22,11 +22,11 @@ async function create(req, res) {
 
 async function deleteOne(req, res) {
   const customer = await Customer.findById(req.user._id);
-  customer.orders.forEach(function(order, idx) {
+  customer.orders.forEach(async function(order, idx) {
     if(req.params.id === order.id) {
-      const deletedOrder = customer.orders.splice(idx, 1);
-      customer.save();
-      return res.json(deletedOrder);
+      customer.orders.splice(idx, 1);
+      const saveCustomer = await customer.save();
+      return res.json(saveCustomer.orders);
     }
   })
 }
