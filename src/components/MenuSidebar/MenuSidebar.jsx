@@ -1,6 +1,6 @@
 import React from 'react';
 import './MenuSidebar.css';
-import {Link} from 'react-router-dom';
+import {HashLink as Link} from 'react-router-hash-link'
 
 const MenuSidebar = (props) => {
     return (
@@ -10,7 +10,7 @@ const MenuSidebar = (props) => {
                     <h4>{menu.name}</h4>
                     {menu.categories.map((category, idx) =>
                         <div key={idx}>
-                            <a href={`#${category.name}`}>{category.name}</a>
+                            <Link to={`${props.location.pathname}#${category.name}`}>{category.name}</Link>
                         </div>
                     )}
 
