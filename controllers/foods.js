@@ -14,7 +14,7 @@ async function getAllFoods(req, res) {
   const customer = await Customer.findById(req.user._id);
   const orders = customer.orders;
   orders.forEach(function(oneOrder) {
-    if(oneOrder.id === req.params.id) {
+    if(oneOrder.restaurant_id === req.params.id) {
       //returns food list
       return res.json(oneOrder.food_items);
     }
@@ -26,7 +26,7 @@ async function createFood(req, res) {
   const customer = await Customer.findById(req.user._id);
   const orders = customer.orders;
   orders.forEach(function(oneOrder) {
-    if(oneOrder.id === req.params.id) {
+    if(oneOrder.restaurant_id === req.params.id) {
       console.log(oneOrder);
       oneOrder.food_items.push(req.body);
       customer.save();
