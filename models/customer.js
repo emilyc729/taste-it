@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const SALT_ROUNDS = 6;
 
 const foodSchema = new Schema({
+    restaurant_id: Number,
     food_id: Number,
     name: String,
     price: Number,
