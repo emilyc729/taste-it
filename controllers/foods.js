@@ -19,7 +19,9 @@ async function createFood(req, res) {
   });
 }
 
+//not working yet
 async function deleteFood(req, res) {
+  console.log(req.params.id);
   const customer = await Customer.findById(req.user._id);
   const orders = customer.orders;
   orders.forEach(function(oneOrder) {
