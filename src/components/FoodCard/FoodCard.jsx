@@ -21,7 +21,8 @@ const FoodCard = (props) => {
                                             <span className="quantity">0</span>
                                             <button className="btn"><i className="far fa-plus-square"></i></button>
                                         </div>
-                                        <button className="btn btn-outline-primary btn-sm">Add to Order</button>
+                                        <button className="btn btn-outline-primary btn-sm" 
+                                            onClick={() => props.handleAddToOrderBtn()}>Add to Order</button>
                                     </div>
                                 </div>
                         </div>
