@@ -3,25 +3,36 @@ import './MenuPage.css';
 import MenuSidebar from '../../components/MenuSidebar/MenuSidebar';
 import Menu from '../../components/Menu/Menu';
 import ordersApi from '../../services/orders-api';
+import foodsApi from '../../services/foods-api';
 
 class MenuPage extends Component {
+    
     state = {
-        customer_orders: []
+        customer_orders: [],
+        order_foodList: []
     }
+    
 
     async componentDidMount() {
+
+        console.log(this.props.match.params.id);
         const customer_orders = await ordersApi.getAllOrders();
-        this.setState({customer_orders: customer_orders});
+        const order_foodList = await foodsApi.getAllFoods(this.props.match.params.id);
+        console.log(order_foodList);
+        this.setState({
+            customer_orders: customer_orders,
+            order_foodList: order_foodList
+        });
     }
+
+   
 
     genRandomOrderNum() {
         return Math.random().toString(36).substring(3);
     }
 
     handleCreateOrder = async ()  => {
-        const ordersCopy = this.state.customer_orders;
-        console.log('------');
-        console.log(ordersCopy);
+        console.log(this.props.restaurant.id);
         const orderObj = {
             restaurant_name: this.props.restaurant.name,
             restaurant_id: this.props.restaurant.id,
@@ -31,7 +42,6 @@ class MenuPage extends Component {
             food_items: []
         }
         const newOrder = await ordersApi.createOrder(orderObj);
-        console.log('=======');
         console.log(newOrder);
         
         this.setState({customer_orders: newOrder});
@@ -42,15 +52,26 @@ class MenuPage extends Component {
 
     handleAddFoodItem = () => {
         console.log('add item to cart');
+
+        // if(this.state.customer_orders) {
+        //     const foodObj = {
+        //         restaurant_id: this.props.restaurant.id,
+
+        //     }
+        // } else {
+
+        // }
+
+       
+
     }
+
 
     //check if restaurant already has an order
     hasOrderCreated = () => {
         //check if restaurant.id already exits in arry of order objs
         ///[{restaurant_id}]
-        console.log(this.props.restaurant.id);
        for(var i = 0; i < this.state.customer_orders.length; i++) {
-        
            if(parseInt(this.state.customer_orders[i].restaurant_id) === this.props.restaurant.id) {
               return true;
            } 
@@ -59,8 +80,33 @@ class MenuPage extends Component {
        return false;
     }
 
-    hasFoodAdded() {
-        console.log('food already in cart, update quantity')
+    //check if food-item already exists in restaurant's order
+    hasFoodAdded = () => {
+        console.log('food already in cart, update quantity');
+       
+        for(var i = 0; i < this.state.order_foodList.length; i++) {
+            console.log(this.state.order_foodList);
+            // if(parseInt(this.state.order_foodList[i].food_id) === this.props.restaurant.id) {
+                
+            // } 
+            
+        }
+        console.log('hi')
+        
+    }
+
+    increaseQuantity = (food_id, curQuantity) => {
+        //increase quantity by 1
+        //let quantity = curQuantity + 1
+        //const updatedFood = foodApi.updateFood(food_id, quantity);
+        //this.setState({order_foodlist})
+    }
+
+    decreaseQuantity = (food_id) => {
+        //decrease quantity by 1
+        //let quantity = curQuantity - 1
+        //const updatedFood = foodApi.updateFood(food_id, quantity);
+        //this.setState({order_foodlist})
     }
     
     
@@ -68,7 +114,8 @@ class MenuPage extends Component {
         const menu = this.props.restaurant ? 
             <div className="row">
                 <div className="col-md-2">
-                    <MenuSidebar menus={this.props.restaurant.menus} />
+                    <MenuSidebar location={this.props.location} menus={this.props.restaurant.menus} />
+                    
                 </div>
                 <div className="col-md-10">
                 {this.props.restaurant.menus.map((menu, idx) => 
@@ -78,6 +125,7 @@ class MenuPage extends Component {
                         restaurant={this.props.restaurant}
                         handleAddToOrderBtn={this.state.customer_orders && this.hasOrderCreated() ? this.handleAddFoodItem : this.handleCreateOrder}
                     />
+                    <div>{this.hasFoodAdded()}</div>
                     </div>
                 )}
                 </div>
