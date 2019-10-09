@@ -26,9 +26,11 @@ class App extends Component {
     const restaurant_menus = await menuApi.getAllMenus();
     const orders = await ordersApi.getAllOrders();
     console.log(orders);
-    
     console.log(restaurant_menus.result);
-    this.setState({ restaurant_menus: restaurant_menus.result });
+    this.setState({ 
+      restaurant_menus: restaurant_menus.result ,
+      customer_orders: orders
+    });
   }
 
   handleSignupOrLogin = () => {
@@ -67,7 +69,6 @@ class App extends Component {
             return <MenuPage
               {...props}
               restaurant={restaurant}
-              customer={this.state.customer}
             />
           }
           } />
