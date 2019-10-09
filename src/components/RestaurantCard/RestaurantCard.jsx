@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import './RestaurantCard.css';
 
 const RestaurantCard = (props) => {
-    let restaurantCard = props.info ?
-        <Link to={`/restaurant/${props.idx}`}>
+    let restaurantCard = props.restaurant ?
+        <Link to={`/restaurant/${props.restaurant.id}`}>
             <div className="card bg-dark text-white mb-4">
-                <img src={props.info.restaurant_photo} className="card-img" alt="props.info.description" />
+                <img src={props.restaurant.restaurant_photo} className="card-img" alt="props.restaurant.description" />
                 <div className="card-img-overlay">
-                    <h5 className="card-title">{props.info.name}</h5>
-                    <p className="card-text">{props.info.address}</p>
-                    <p className="card-text">{props.info.phone}</p>
+                    <h5 className="card-title">{props.restaurant.name}</h5>
+                    <p className="card-text">{props.restaurant.address}</p>
+                    <p className="card-text">{props.restaurant.phone}</p>
                 </div>
             </div>
         </Link>
