@@ -4,9 +4,8 @@ const foodsCtrl = require('../../controllers/foods');
 
 
 router.use(require('../../config/auth'));
-router.get('/', foodsCtrl.index);
-router.post('/', foodsCtrl.create);
-router.delete('/:id', foodsCtrl.delete);
+router.post('/:id/foods', foodsCtrl.createFood);
+router.delete('foods/:id', foodsCtrl.deleteFood);
 
 /*----- Helper Functions -----*/
 function checkAuth(req, res, next) {
