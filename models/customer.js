@@ -8,7 +8,7 @@ const orderSchema = new Schema({
     restaurant_name: String,
     restaurant_id: String,
     order_num: String,
-    total: Number,
+    total_price: Number,
     total_items: Number,
     food_items: []
 }, {
