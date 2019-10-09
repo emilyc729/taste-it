@@ -1,10 +1,25 @@
 const Customer = require('../models/customer');
 
 module.exports = {
+  getAllFoods,
   createFood,
   updateFood,
   deleteFood
 };
+
+
+
+async function getAllFoods(req, res) {
+  //console.log(req.user);
+  const customer = await Customer.findById(req.user._id);
+  const orders = customer.orders;
+  orders.forEach(function(oneOrder) {
+    if(oneOrder.id === req.params.id) {
+      //returns food list
+      return res.json(oneOrder.food_items);
+    }
+  });
+}
 
 async function createFood(req, res) {
   //console.log(req.user);
@@ -15,7 +30,8 @@ async function createFood(req, res) {
       console.log(oneOrder);
       oneOrder.food_items.push(req.body);
       customer.save();
-      return res.json(orders[orders.length -1].food_items);
+      //returns updated food list
+      return res.json(oneOrder.food_items);
     }
   });
 }
