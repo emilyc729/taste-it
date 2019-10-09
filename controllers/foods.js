@@ -2,6 +2,7 @@ const Customer = require('../models/customer');
 
 module.exports = {
   createFood,
+  updateFood,
   deleteFood
 };
 
@@ -19,7 +20,20 @@ async function createFood(req, res) {
   });
 }
 
-//not working yet
+async function updateFood(req, res) {
+  const customer = await Customer.findById(req.user._id);
+  const orders = customer.orders;
+  orders.forEach(function(oneOrder) {
+    oneOrder.food_items.forEach(function(oneFood, idx) {
+      if(oneFood.id === req.params.id) {
+        oneFood.quantity = req.body.quantity;
+        customer.save();
+        return res.json(oneFood);
+      }
+    });
+  });
+}
+
 async function deleteFood(req, res) {
   console.log(req.params.id);
   const customer = await Customer.findById(req.user._id);

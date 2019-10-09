@@ -5,6 +5,7 @@ const foodsCtrl = require('../../controllers/foods');
 
 router.use(require('../../config/auth'));
 router.post('/:id/foods', foodsCtrl.createFood);
+router.put('/foods/:id', foodsCtrl.updateFood);
 router.delete('/foods/:id', foodsCtrl.deleteFood);
 
 /*----- Helper Functions -----*/
