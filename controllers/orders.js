@@ -17,7 +17,7 @@ async function create(req, res) {
   const customer = await Customer.findById(req.user._id);
   customer.orders.push(req.body);
   const saveCustomer = await customer.save();
-  return res.json(saveCustomer);
+  return res.json(saveCustomer.orders);
 }
 
 async function deleteOne(req, res) {
