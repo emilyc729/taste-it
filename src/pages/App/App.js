@@ -17,19 +17,19 @@ class App extends Component {
     this.state = {
       restaurant_menus: [],
       // Initialize user if there's a token, otherwise null
-      customer_orders: [],
+      //customer_orders: [],
       customer: customerService.getCustomer()
     };
   }
 
   async componentDidMount() {
     const restaurant_menus = await menuApi.getAllMenus();
-    const orders = await ordersApi.getAllOrders();
-    console.log(orders);
+    //const orders = await ordersApi.getAllOrders();
+    //console.log(orders);
     console.log(restaurant_menus.result);
     this.setState({ 
       restaurant_menus: restaurant_menus.result ,
-      customer_orders: orders
+      //customer_orders: orders
     });
   }
 
@@ -58,7 +58,7 @@ class App extends Component {
               <div className="row">
                 {this.state.restaurant_menus.map((restaurant, idx) =>
                   <div key={idx} className="col-md-4">
-                    <RestaurantCard info={restaurant} idx={idx} />
+                    <RestaurantCard restaurant={restaurant} />
                   </div>
                 )}
               </div>
@@ -75,7 +75,7 @@ class App extends Component {
           <Route exact path='/orders' render={(props) => {
             return <OrderPage
               {...props}
-              orders={this.state.customer.orders}
+              //orders={this.state.customer.orders}
             />
           }
           } />
