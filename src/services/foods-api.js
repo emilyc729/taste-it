@@ -3,8 +3,8 @@ import tokenService from '../utils/tokenService';
 const BASE_URL = '/api/orders';
 
 
-function getAllFoods(order_id) {
-    return fetch(`${BASE_URL}/${order_id}/foods`, {
+function getAllFoods(restaurant_id) {
+    return fetch(`${BASE_URL}/${restaurant_id}/foods`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -13,8 +13,8 @@ function getAllFoods(order_id) {
     }).then(res => res.json());
 }
 
-function createFood(order_id, food) {
-    return fetch(`${BASE_URL}/${order_id}/foods`, {
+function createFood(restaurant_id, food) {
+    return fetch(`${BASE_URL}/${restaurant_id}/foods`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
