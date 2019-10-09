@@ -29,7 +29,6 @@ class MenuPage extends Component {
             total_price: 0,
             food_items: []
         }
-
         const newOrder = await ordersApi.createOrder(orderObj);
         console.log(newOrder);
 
@@ -44,8 +43,18 @@ class MenuPage extends Component {
     }
 
     //check if restaurant already has an order
-    hasOrderCreated() {
-       
+    hasOrderCreated = () => {
+        //check if restaurant.id already exits in arry of order objs
+        ///[{restaurant_id}]
+        console.log(this.props.restaurant.id);
+       for(var i = 0; i < this.state.customer_orders.length; i++) {
+        
+           if(parseInt(this.state.customer_orders[i].restaurant_id) === this.props.restaurant.id) {
+              return true;
+           } 
+           
+       }
+       return false;
     }
 
     
@@ -66,7 +75,7 @@ class MenuPage extends Component {
                     customer_orders={this.state.customer_orders}
                     restaurant={this.props.restaurant}
                     handleAddToOrderBtn={
-                        this.state.customer_orders ? this.handleAddFoodItem : this.handleCreateOrder
+                        this.state.customer_orders && this.hasOrderCreated()  ? this.handleAddFoodItem : this.handleCreateOrder
                     }
                 />
                 </div>
