@@ -18,8 +18,6 @@ class Menu extends Component {
                                 key={food.id}
                                 {...this.props} 
                                 food={food} 
-                                customer_orders={this.props.customer_orders}
-                                handleAddToOrderBtn={this.props.handleAddToOrderBtn}
                             />
                         )}
                         </div>
