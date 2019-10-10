@@ -46,19 +46,6 @@ class FoodCard extends Component {
         
 
     }
-    //'add to order' btn function
-    createOrderOrAddItem = () => {
-        if(this.state.customer_orders && this.hasOrderCreated()) {
-            if(this.hasFoodAdded()) {
-                console.log('need to update food quantity');
-               // const updateFoodQuantity = foodsApi.updateFood(this.props.restaurant_id, quantity);
-            } else {
-                return this.handleAddFoodItem();
-            }
-        } else {
-            return this.handleCreateOrder();
-        }
-    }
 
     //create food item and add to pertaining restaurant order
     handleAddFoodItem = async () => {
@@ -93,7 +80,9 @@ class FoodCard extends Component {
     //check if food-item already exists in restaurant's order
     hasFoodAdded = () => {
         console.log(this.state.order_foodList);
+        console.log(this.props.food.id);
         for(var i = 0; i < this.state.order_foodList.length; i++) {
+            console.log(this.state.order_foodList[i].food_id);
             if(parseInt(this.state.order_foodList[i].food_id) === this.props.food.id) {
                 console.log('true');
                 return true;
@@ -119,24 +108,62 @@ class FoodCard extends Component {
     }
 
     increment = () => {
-        console.log('hi');
+        //console.log('hi');
         let addOne = this.state.quantity;
         addOne++;
         this.setState({quantity: addOne});
-        console.log(this.state.quantity);
+        //console.log(this.state.quantity);
     }
 
     decrement = () => {
         let minusOne = this.state.quantity;
         if(minusOne > 1) minusOne--;
         this.setState({quantity: minusOne});
-        console.log(this.state.quantity);
+        //console.log(this.state.quantity);
     }
 
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
           });
+    }
+
+    updateQuantityOnFoodAdd = async () => {
+
+        let savedQuantity = 0;
+        let curQuantity = this.state.quantity;
+        let total = 0;
+        for(var i = 0; i < this.state.order_foodList.length; i++) {
+            if(parseInt(this.state.order_foodList[i].food_id) === this.props.food.id) {
+                savedQuantity = this.state.order_foodList[i].quantity;
+                total = savedQuantity + curQuantity;
+                console.log(total);
+                const updateQuantity = {
+                    quantity: total
+                }
+                const updatedFood = await foodsApi.updateFood(this.state.order_foodList[i]._id, updateQuantity);
+                console.log(updatedFood);
+                this.setState({order_foodList: updatedFood});
+            } 
+            
+        }
+        console.log(curQuantity);
+
+        console.log(savedQuantity);
+    }
+
+     //'add to order' btn function
+     createOrderOrAddItem = () => {
+        if(this.state.customer_orders && this.hasOrderCreated()) {
+            if(this.hasFoodAdded()) {
+                console.log('update food quantity');
+                this.updateQuantityOnFoodAdd();
+            } else {
+                return this.handleAddFoodItem();
+            }
+        } else {
+            return this.handleCreateOrder();
+        }
     }
 
     render() {

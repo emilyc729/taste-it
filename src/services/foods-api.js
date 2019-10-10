@@ -24,6 +24,17 @@ function createFood(restaurant_id, food) {
     }).then(res => res.json());
 }
 
+function updateFood(food_id, food) {
+    return fetch(`${BASE_URL}/foods/${food_id}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer ' + tokenService.getToken()
+        },
+        body: JSON.stringify(food)
+    }).then(res => res.json());
+}
+
 function deleteFood(food_id) {
     return fetch(`${BASE_URL}/foods/${food_id}`, {
         method: 'DELETE',
@@ -36,6 +47,7 @@ function deleteFood(food_id) {
 
 export default {
     getAllFoods,
-    createFood, 
+    createFood,
+    updateFood,
     deleteFood
 };
