@@ -11,7 +11,6 @@ class FoodCard extends Component {
         order_foodList: []
     }
     
-
     async componentDidMount() {
 
         console.log(this.props.match.params.id);
@@ -23,8 +22,7 @@ class FoodCard extends Component {
         });
     }
 
-
-
+    //generate 10digit random order#
     genRandomOrderNum() {
         return Math.random().toString(36).substring(3);
     }
@@ -50,14 +48,18 @@ class FoodCard extends Component {
 
     createOrderOrAddItem = () => {
         if(this.state.customer_orders && this.hasOrderCreated()) {
-            return this.handleAddFoodItem();
+            if(this.hasFoodAdded()) {
+                console.log('update food quantity');
+            } else {
+                return this.handleAddFoodItem();
+            }
         } else {
             return this.handleCreateOrder();
         }
     }
 
     handleAddFoodItem = async () => {
-      
+        console.log('added food to order');
         const foodObj = {
             restaurant_id: this.props.restaurant.id,
             food_id: this.props.food.id,
@@ -69,7 +71,6 @@ class FoodCard extends Component {
         const addedFoods = await foodsApi.createFood(this.props.restaurant.id, foodObj);
         console.log(addedFoods);
         this.setState({order_foodList: addedFoods});
-        
 
     }
 
@@ -89,16 +90,16 @@ class FoodCard extends Component {
 
     //check if food-item already exists in restaurant's order
     hasFoodAdded = () => {
-        console.log('food already in cart, update quantity');
+        console.log(this.state.order_foodList);
         for(var i = 0; i < this.state.order_foodList.length; i++) {
-            console.log(this.state.order_foodList);
-            // if(parseInt(this.state.order_foodList[i].food_id) === this.props.restaurant.id) {
-                
-            // } 
+            if(parseInt(this.state.order_foodList[i].food_id) === this.props.food.id) {
+                console.log('true');
+                return true;
+            } 
             
         }
-        console.log('hi')
-        
+        console.log('false');
+        return false;
     }
 
     increaseQuantity = (food_id, curQuantity) => {
