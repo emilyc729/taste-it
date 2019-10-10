@@ -6,7 +6,7 @@ import './FoodCard.css';
 
 class FoodCard extends Component {
     state = {
-        quantity: 0,
+        quantity: 1,
         customer_orders: [],
         order_foodList: []
     }
@@ -27,6 +27,7 @@ class FoodCard extends Component {
         return Math.random().toString(36).substring(3);
     }
 
+    //create order for restaurant
     handleCreateOrder = async ()  => {
 
         const orderObj = {
@@ -45,11 +46,12 @@ class FoodCard extends Component {
         
 
     }
-
+    //'add to order' btn function
     createOrderOrAddItem = () => {
         if(this.state.customer_orders && this.hasOrderCreated()) {
             if(this.hasFoodAdded()) {
-                console.log('update food quantity');
+                console.log('need to update food quantity');
+               // const updateFoodQuantity = foodsApi.updateFood(this.props.restaurant_id, quantity);
             } else {
                 return this.handleAddFoodItem();
             }
@@ -58,6 +60,7 @@ class FoodCard extends Component {
         }
     }
 
+    //create food item and add to pertaining restaurant order
     handleAddFoodItem = async () => {
         console.log('added food to order');
         const foodObj = {
@@ -71,7 +74,6 @@ class FoodCard extends Component {
         const addedFoods = await foodsApi.createFood(this.props.restaurant.id, foodObj);
         console.log(addedFoods);
         this.setState({order_foodList: addedFoods});
-
     }
 
 
@@ -116,6 +118,27 @@ class FoodCard extends Component {
         //this.setState({order_foodlist})
     }
 
+    increment = () => {
+        console.log('hi');
+        let addOne = this.state.quantity;
+        addOne++;
+        this.setState({quantity: addOne});
+        console.log(this.state.quantity);
+    }
+
+    decrement = () => {
+        let minusOne = this.state.quantity;
+        if(minusOne > 1) minusOne--;
+        this.setState({quantity: minusOne});
+        console.log(this.state.quantity);
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+          });
+    }
+
     render() {
         return (
             <div key={this.props.food.name} className="col-md-6 col-lg-4">
@@ -127,11 +150,11 @@ class FoodCard extends Component {
                             <span>${this.props.food.price}</span>
                         </h5>
                         <div className="card-text text-center d-flex justify-content-around">
-                            <form>
-                                <button className="btn"><i className="far fa-minus-square"></i></button>
-                                <input className="quantity" type="number" name="quantity" defaultValue={this.state.value}></input>
-                                <button className="btn"><i className="far fa-plus-square"></i></button>
-                            </form>
+                            <div>
+                                <button className="btn" onClick={() => this.decrement()}><i className="far fa-minus-square"></i></button>
+                                <input className="quantity" type="number" name="quantity" value={this.state.quantity} onChange={this.handleChange} />
+                                <button className="btn" onClick={() => this.increment()}><i className="far fa-plus-square"></i></button>
+                            </div>
                             <button className="btn btn-outline-primary btn-sm"
                                 onClick={() => this.createOrderOrAddItem()}>Add to Order</button>
                         </div>

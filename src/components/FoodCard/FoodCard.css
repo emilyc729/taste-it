@@ -14,7 +14,11 @@
     outline: none;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+.quantity::-webkit-outer-spin-button,
+.quantity::-webkit-inner-spin-button {
     -webkit-appearance: none;
+}
+
+.quantity:focus{
+    outline: none;
 }
