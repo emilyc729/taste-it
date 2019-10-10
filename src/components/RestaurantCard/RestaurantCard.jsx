@@ -4,7 +4,7 @@ import './RestaurantCard.css';
 
 const RestaurantCard = (props) => {
     let restaurantCard = props.restaurant ?
-        <Link to={`/restaurant/${props.restaurant.id}`}>
+        <Link to={`/restaurant/${props.restaurant.id}/${props.idx}`}>
             <div className="card bg-dark text-white mb-4">
                 <img src={props.restaurant.restaurant_photo} className="card-img" alt="props.restaurant.description" />
                 <div className="card-img-overlay">
