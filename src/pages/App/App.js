@@ -41,6 +41,7 @@ class App extends Component {
     customerService.logout();
     this.setState({ customer: null });
   }
+  
 
   render() {
     return (
@@ -58,14 +59,14 @@ class App extends Component {
               <div className="row">
                 {this.state.restaurant_menus.map((restaurant, idx) =>
                   <div key={idx} className="col-md-4">
-                    <RestaurantCard restaurant={restaurant} />
+                    <RestaurantCard restaurant={restaurant} idx={idx} />
                   </div>
                 )}
               </div>
             </section>
           } />
-          <Route exact path='/restaurant/:id' render={(props) => {
-            let restaurant = this.state.restaurant_menus[props.match.params.id];
+          <Route exact path='/restaurant/:id/:idx' render={(props) => {
+            let restaurant = this.state.restaurant_menus[props.match.params.idx];
             return <MenuPage
               {...props}
               restaurant={restaurant}
