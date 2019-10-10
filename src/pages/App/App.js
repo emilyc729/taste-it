@@ -6,7 +6,6 @@ import LoginPage from '../LoginPage/LoginPage';
 import NavBar from '../../components/NavBar/NavBar';
 import customerService from '../../utils/customerService';
 import menuApi from '../../services/menus-api';
-import ordersApi from '../../services/orders-api';
 import RestaurantCard from '../../components/RestaurantCard/RestaurantCard';
 import MenuPage from '../MenuPage/MenuPage';
 import OrderPage from  '../OrderPage/OrderPage';
@@ -16,16 +15,12 @@ class App extends Component {
     super();
     this.state = {
       restaurant_menus: [],
-      // Initialize user if there's a token, otherwise null
-      //customer_orders: [],
       customer: customerService.getCustomer()
     };
   }
 
   async componentDidMount() {
     const restaurant_menus = await menuApi.getAllMenus();
-    //const orders = await ordersApi.getAllOrders();
-    //console.log(orders);
     console.log(restaurant_menus.result);
     this.setState({ 
       restaurant_menus: restaurant_menus.result ,
