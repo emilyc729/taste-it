@@ -16,7 +16,8 @@ async function getAllFoods(req, res) {
   orders.forEach(function(oneOrder) {
     if(oneOrder.restaurant_id === req.params.id) {
       //returns food list
-      return res.json(oneOrder.food_items);
+      const getFoodList = oneOrder.food_items;
+      return res.json(getFoodList);
     }
   });
 }
@@ -25,12 +26,13 @@ async function createFood(req, res) {
   //console.log(req.user);
   const customer = await Customer.findById(req.user._id);
   const orders = customer.orders;
-  orders.forEach(function(oneOrder) {
+  orders.forEach(async function(oneOrder) {
     if(oneOrder.restaurant_id === req.params.id) {
-      console.log(oneOrder);
       oneOrder.food_items.push(req.body);
-      customer.save();
+      await customer.save();
       //returns updated food list
+      console.log('-------');
+      console.log(oneOrder.food_items);
       return res.json(oneOrder.food_items);
     }
   });
@@ -44,7 +46,8 @@ async function updateFood(req, res) {
       if(oneFood.id === req.params.id) {
         oneFood.quantity = req.body.quantity;
         customer.save();
-        return res.json(oneFood);
+        //return updated food list
+        return res.json(oneOrder.food_items);
       }
     });
   });
