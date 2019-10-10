@@ -29,22 +29,22 @@ class OrderPage extends Component {
             this.state.customer_orders.map((order, idx) =>
               <div key={order.order_num} className="col-md-4">
                 <div className="parent mb-4">
-                <button className="deleteButton btn btn-sm btn-outline-danger" onClick={() => this.handleDeleteOrder(order._id)}><i className="far fa-trash-alt"></i></button>
-                 
-                  <div className="card" data-toggle="modal" data-target={`.${order.order_num}`}>
-                  
-                  <div className="card-body mt-3">
+                  <button className="deleteButton btn btn-sm btn-outline-danger" onClick={() => this.handleDeleteOrder(order._id)}><i className="fas fa-times"></i></button>
+
+                  <div className="card" data-toggle="modal" data-target={`.${order.name}${order.order_num}`}>
+
+                    <div className="card-body mt-3">
                       <h6 className="card-title">{order.restaurant_name}</h6>
-                      
+
                       <h6 className="card-subtitle mb-2 text-muted">{`Total Items:${order.food_items.length}`}</h6>
                       <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          
+
                     </div>
-              
-                
+
+
+                  </div>
                 </div>
-              </div>
-                <div className={`modal fade bd-example-modal-lg ${order.order_num}`} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div className={`modal fade bd-example-modal-lg ${order.name}${order.order_num}`} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                   <div className="modal-dialog" role="document">
                     <div className="modal-content">
                       <div className="modal-header ">
@@ -54,11 +54,32 @@ class OrderPage extends Component {
                         </button>
                       </div>
 
-                      {order.food_items.map((food, idx) =>
-                        <div key={`${food.name}${idx}`} className="modal-body">
-                          {food.name}
+                      
+                        <div className="modal-body">
+                          <table className="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Item</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                                <th scope="col"></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            {order.food_items.map((food, idx) =>
+                              <tr key={`${food.name}${idx}`}>
+                                <th scope="row">{idx+1}</th>
+                                <td>{food.name}</td>
+                                <td>{food.quantity}</td>
+                                <td>{food.price}</td>
+                                <td><i className="btn-outline-danger far fa-trash-alt"></i></td>
+                              </tr>
+                              )}
+                            </tbody>
+                          </table>
                         </div>
-                      )}
+                      
 
                       <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>

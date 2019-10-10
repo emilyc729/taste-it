@@ -8,6 +8,8 @@
     position: absolute;
     top: 0;
     right: 0;
+    padding: 2px 8px;
+   
 }
 .parent {
  position: relative;
