@@ -27,7 +27,7 @@ class OrderPage extends Component {
         <div className="row">
           {this.state.customer_orders ?
             this.state.customer_orders.map((order, idx) =>
-              <div key={idx} className="col-md-4">
+              <div key={order.order_num} className="col-md-4">
                 <div className="parent mb-4">
                 <button className="deleteButton btn btn-sm btn-outline-danger" onClick={() => this.handleDeleteOrder(order._id)}><i className="far fa-trash-alt"></i></button>
                  
@@ -55,7 +55,7 @@ class OrderPage extends Component {
                       </div>
 
                       {order.food_items.map((food, idx) =>
-                        <div key={food.food_id} className="modal-body">
+                        <div key={`${food.name}${idx}`} className="modal-body">
                           {food.name}
                         </div>
                       )}
