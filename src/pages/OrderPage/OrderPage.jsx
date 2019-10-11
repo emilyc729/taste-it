@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import {Route, Link, NavLink} from 'react-router-dom';
 import ordersApi from '../../services/orders-api';
-import FoodItem from '../../components/FoodItem/FoodItem';
+import Order from '../../components/Order/Order';
+
 import './OrderPage.css';
+
 
 
 class OrderPage extends Component {
@@ -25,7 +28,7 @@ class OrderPage extends Component {
     this.setState({ customer_orders: orderDeleted });
   }
 
-  
+
   handleClick = (e) => {
 
     console.log('The link was clicked.');
@@ -36,22 +39,85 @@ class OrderPage extends Component {
   };
 
   render() {
-    
+
     return (
       <div className="OrderPage container">
+
+        {this.state.customer_orders ?
+          <div>
+            <h1 className="text-center">Your Orders</h1>
+            <ul className="nav nav-pills mb-3 orderList">
+            {this.state.customer_orders.map((order, idx) => 
+  
+              <li key={idx} className="nav-item parent">
+                
+                <NavLink activeClassName="active" to={`/orders/${order.restaurant_id}`} className={`nav-link`}>
+                  {`${order.restaurant_name} Order`} 
+                </NavLink>
+              </li>
+            
+          )}
+          </ul>
+          <Route path="/orders/:id" render={(props) => {
+            return (
+            <div className="OrderContent">
+              
+              {this.state.customer_orders ?
+                this.state.customer_orders.map((order, idx) =>
+                <div key={`${order.restaurant_name}${idx}`}>
+                  {order.restaurant_id === props.match.params.id ? 
+                    <div>
+                      <h3>Order#: {order.order_num}</h3>
+                      <button className="deleteBtn btn btn-sm btn-outline-danger" onClick={() => this.handleDeleteOrder(order._id)}>Delete Order</button>
+                      <table className="table table-hover mt-4">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Item</th>
+                              <th scope="col">Quantity</th>
+                              <th scope="col">Price</th>
+                              <th scope="col">Total</th>
+                              <th scope="col"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                        {order.food_items.map((food, idx) =>
+                                <Order key={food._id} food={food} idx={idx} />
+                        )}
+                                   </tbody>
+                        </table>
+                    </div>
+                    :
+                    ''
+                  }
+                  
+                </div>
+                )
+                :
+                <div>Loading...</div>
+              }
+       
+            </div>
+            )}
+          } />
+          </div>
+          :
+          <div>Loading...</div>
+        }
         <div className="row">
-          {this.state.customer_orders ?
+
+          {/* {this.state.customer_orders ?
 
             this.state.customer_orders.map((order, orderIdx) =>
 
 
-              <div key={order.order_num} className="col-md-4">
+              <div key={order.order_num} className="col-md-4 mt-3">
                 <div className="parent mb-4">
                   <button className="deleteButton btn btn-sm btn-outline-danger" onClick={() => this.handleDeleteOrder(order._id)}><i className="fas fa-times"></i></button>
 
                   <div className="card" data-toggle="modal" data-target={`.${order.name}${order.order_num}`}>
 
-                    <div className="card-body mt-3">
+                    <div className="card-body">
                       <h6 className="card-title">{order.restaurant_name} Order</h6>
 
                     </div>
@@ -84,7 +150,7 @@ class OrderPage extends Component {
                           </thead>
                           <tbody>
                             {order.food_items.map((food, idx) =>
-                              <FoodItem key={food._id} food={food} idx={idx} />
+                              <Order key={food._id} food={food} idx={idx} />
                               // <tr key={`${food.name}${idx}`}>
                               //   <th scope="row">{idx + 1}</th>
                               //   <td>{food.name}</td>
@@ -117,7 +183,7 @@ class OrderPage extends Component {
             :
             <h1>You have no orders yet!</h1>
 
-          }
+          } */}
         </div>
       </div>
     );

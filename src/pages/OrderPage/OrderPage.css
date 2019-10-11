@@ -1,16 +1,22 @@
 .OrderPage {
-    margin-top: 8%;
-    padding-top: 10%;
+    padding-top: 75px;
 }
 
+.orderList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.OrderContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .deleteButton {
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 2px 8px;
-   
+    margin-left: 30px;
+    
 }
 .parent {
  position: relative;
