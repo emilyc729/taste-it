@@ -24,6 +24,15 @@
 }
 
 .card {
-    border: 2px solid rgba(0,0,0,.125);
+    /* border: 1px solid rgba(0,0,0,.125); */
     border-radius: 5px;
+    box-shadow: 0 0 15px #7e7d7d;
+}
+
+.card-body, .addOrderBtn  {
+    background-color: #FFFFD8;
+}
+
+.numBtn {
+    padding: 0;
 }

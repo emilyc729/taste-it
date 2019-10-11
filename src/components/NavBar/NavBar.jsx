@@ -4,22 +4,22 @@ import './NavBar.css';
 
 const NavBar = (props) => {
   let nav = props.customer ?
-    <div>
+  
 
-      <nav className="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
-        <Link to='' className="navbar-brand">Taste-It</Link>
+      <nav className="navbar navbar-expand-lg navbar-light d-flex justify-content-between">
+        <Link to='' className="navbar-brand"><i className="far fa-grin-wink"></i> Taste-It</Link>
         <div className="dropdown">
           <button className="btn btn-outline-success" id="navbarDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span className="fas fa-utensils"></span>
           </button>
-          <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <div className="dropdown-menu dropdown-menu-right mt-1" aria-labelledby="navbarDropdown">
             <Link to='/orders' className="dropdown-item">View Orders</Link>
-            <Link to='' className="dropdown-item">All Restaurants</Link>
+            <Link to='' className="dropdown-item">Restaurants</Link>
             <Link to='' className="dropdown-item" onClick={props.handleLogout}><button className="btn btn-outline-primary">Logout</button></Link>
           </div>
         </div>
       </nav>
-    </div>
+
     :
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -44,7 +44,7 @@ const NavBar = (props) => {
 
 
   return (
-    <div className='fixed-top'>
+    <div className="NavBar">
       {nav}
     </div>
   );

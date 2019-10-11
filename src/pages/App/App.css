@@ -6,6 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #E0FEFE;
 }
 
 code {
@@ -17,7 +18,7 @@ code {
 .footer {
   text-align: center;
   padding: 8px;
- 
+  background-color: #FFFFD8;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -25,5 +26,6 @@ code {
 }
 
 section {
-  margin-top: 20%;
+  margin-top: 8%;
+  padding-top: 10%;
 }

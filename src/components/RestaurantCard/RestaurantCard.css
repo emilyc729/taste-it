@@ -1,4 +1,15 @@
 img {
     height: 200px;
-    opacity: 0.5;
+}
+
+.RestaurantCard {
+    color: #FFFFD8;
+    text-shadow: 1px 1px 5px rgb(0, 0, 0);
+    font-weight: bold;
+    
+}
+
+.card-img-overlay {
+    background-color: rgba(0, 0, 0, 0.452);
+
 }

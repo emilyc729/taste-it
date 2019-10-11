@@ -17,6 +17,20 @@ class FoodItem extends Component {
         this.setState({order_foodlist: order_foodlist});
     }
 
+    increaseQuantity = (food_id, curQuantity) => {
+        //increase quantity by 1
+        //let quantity = curQuantity + 1
+        //const updatedFood = foodApi.updateFood(food_id, quantity);
+        //this.setState({order_foodlist: updateFood})
+    }
+
+    decreaseQuantity = (food_id) => {
+        //decrease quantity by 1
+        //let quantity = curQuantity - 1
+        //const updatedFood = foodApi.updateFood(food_id, quantity);
+        //this.setState({order_foodlist: updateFood})
+    }
+
 
 
     increment = async () => {
@@ -70,7 +84,7 @@ class FoodItem extends Component {
                 </td>
                 <td>${this.props.food.price}</td>
                 <td>${(this.props.food.price * this.state.quantity).toFixed(2)}</td>
-                <td><i className="deleteFood btn far fa-trash-alt" onClick={() => this.deleteFood()}></i></td>
+                <td><i className="deleteFood btn far fa-trash-alt" onClick={this.deleteFood}></i></td>
             </tr>
 
         );

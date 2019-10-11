@@ -96,7 +96,7 @@ class FoodCard extends Component {
     increment = () => {
         //console.log('hi');
         let addOne = this.state.quantity;
-        addOne++;
+        if(addOne < 15) addOne++;
         this.setState({quantity: addOne});
         //console.log(this.state.quantity);
     }
@@ -151,9 +151,9 @@ class FoodCard extends Component {
     render() {
         return (
             <div key={this.props.food.name} className="col-md-6 col-lg-4">
-                <div className="card bg-dark mt-4">
+                <div className="card mt-4">
                     <img src={this.props.food.food_photo} className="card-img-top" alt={this.props.food.description} />
-                    <div className="card-body bg-light">
+                    <div className="card-body">
                         <h5 className="card-title d-flex justify-content-between">
                             <span>{this.props.food.name}</span>
                             <span>${this.props.food.price}</span>
@@ -161,11 +161,11 @@ class FoodCard extends Component {
                         {this.props.customer ? 
                             <div className="card-text text-center d-flex justify-content-around">
                                 <div>
-                                    <button className="btn" onClick={() => this.decrement()}><i className="far fa-minus-square"></i></button>
+                                    <button className="btn numBtn" onClick={() => this.decrement()}><i className="far fa-minus-square"></i></button>
                                     <input className="quantity" type="number" name="quantity" value={this.state.quantity} onChange={this.handleChange} />
-                                    <button className="btn" onClick={() => this.increment()}><i className="far fa-plus-square"></i></button>
+                                    <button className="btn numBtn" onClick={() => this.increment()}><i className="far fa-plus-square"></i></button>
                                 </div>
-                                <button className="btn btn-outline-primary btn-sm"
+                                <button className="btn-outline-primary btn-sm addOrderBtn"
                                     onClick={() => this.createOrderOrAddItem()}>Add to Order</button>
                             </div>
                             :

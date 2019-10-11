@@ -7,3 +7,16 @@
     top: 0;
     bottom: 0;
 }
+
+a {
+    display: block;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.active {
+    font-weight: bold;
+}
