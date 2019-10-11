@@ -8,11 +8,13 @@ const NavBar = (props) => {
 
       <nav className="navbar navbar-expand-lg navbar-light d-flex justify-content-between">
         <Link to='' className="navbar-brand"><i className="far fa-grin-wink"></i> Taste-It</Link>
+        <h4>Welcome, {props.customer.name}</h4>
         <div className="dropdown">
           <button className="btn btn-outline-success" id="navbarDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span className="fas fa-utensils"></span>
           </button>
           <div className="dropdown-menu dropdown-menu-right mt-1" aria-labelledby="navbarDropdown">
+            
             <Link to='/orders' className="dropdown-item">View Orders</Link>
             <Link to='' className="dropdown-item">Restaurants</Link>
             <Link to='' className="dropdown-item" onClick={props.handleLogout}><button className="btn btn-outline-primary">Logout</button></Link>
