@@ -11,8 +11,8 @@ class Menu extends Component {
             <div className="Menu container">
                 {this.props.categories.map((category, idx) =>
                     <div key={category.name}>
-                        <h3 id={category.name} className="text-center mt-4" name={category.name}>{category.name}</h3>
-                        <div className="row">
+                        <h3 id={category.name} className="text-center" name={category.name}>{category.name}</h3>
+                        <div className="row mb-4">
                         {category.foods.map((food, idx) =>
                             <FoodCard
                                 key={food.id}
