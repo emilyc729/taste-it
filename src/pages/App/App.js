@@ -65,6 +65,7 @@ class App extends Component {
             return <MenuPage
               {...props}
               restaurant={restaurant}
+              customer={this.state.customer}
             />
           }
           } />
