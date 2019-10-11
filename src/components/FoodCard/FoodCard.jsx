@@ -93,20 +93,6 @@ class FoodCard extends Component {
         return false;
     }
 
-    increaseQuantity = (food_id, curQuantity) => {
-        //increase quantity by 1
-        //let quantity = curQuantity + 1
-        //const updatedFood = foodApi.updateFood(food_id, quantity);
-        //this.setState({order_foodlist})
-    }
-
-    decreaseQuantity = (food_id) => {
-        //decrease quantity by 1
-        //let quantity = curQuantity - 1
-        //const updatedFood = foodApi.updateFood(food_id, quantity);
-        //this.setState({order_foodlist})
-    }
-
     increment = () => {
         //console.log('hi');
         let addOne = this.state.quantity;
@@ -145,11 +131,7 @@ class FoodCard extends Component {
                 console.log(updatedFood);
                 this.setState({order_foodList: updatedFood});
             } 
-            
         }
-        console.log(curQuantity);
-
-        console.log(savedQuantity);
     }
 
      //'add to order' btn function
@@ -157,7 +139,7 @@ class FoodCard extends Component {
         if(this.state.customer_orders && this.hasOrderCreated()) {
             if(this.hasFoodAdded()) {
                 console.log('update food quantity');
-                this.updateQuantityOnFoodAdd();
+                return this.updateQuantityOnFoodAdd();
             } else {
                 return this.handleAddFoodItem();
             }
@@ -176,15 +158,19 @@ class FoodCard extends Component {
                             <span>{this.props.food.name}</span>
                             <span>${this.props.food.price}</span>
                         </h5>
-                        <div className="card-text text-center d-flex justify-content-around">
-                            <div>
-                                <button className="btn" onClick={() => this.decrement()}><i className="far fa-minus-square"></i></button>
-                                <input className="quantity" type="number" name="quantity" value={this.state.quantity} onChange={this.handleChange} />
-                                <button className="btn" onClick={() => this.increment()}><i className="far fa-plus-square"></i></button>
+                        {this.props.customer ? 
+                            <div className="card-text text-center d-flex justify-content-around">
+                                <div>
+                                    <button className="btn" onClick={() => this.decrement()}><i className="far fa-minus-square"></i></button>
+                                    <input className="quantity" type="number" name="quantity" value={this.state.quantity} onChange={this.handleChange} />
+                                    <button className="btn" onClick={() => this.increment()}><i className="far fa-plus-square"></i></button>
+                                </div>
+                                <button className="btn btn-outline-primary btn-sm"
+                                    onClick={() => this.createOrderOrAddItem()}>Add to Order</button>
                             </div>
-                            <button className="btn btn-outline-primary btn-sm"
-                                onClick={() => this.createOrderOrAddItem()}>Add to Order</button>
-                        </div>
+                            :
+                            <div></div>
+                        }
                     </div>
                 </div>
             </div>
