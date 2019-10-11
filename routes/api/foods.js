@@ -4,10 +4,10 @@ const foodsCtrl = require('../../controllers/foods');
 
 
 router.use(require('../../config/auth'));
-router.get('/:id/foods', foodsCtrl.getAllFoods);
-router.post('/:id/foods', foodsCtrl.createFood);
-router.put('/foods/:id', foodsCtrl.updateFood);
-router.delete('/foods/:id', foodsCtrl.deleteFood);
+router.get('/:id/foods', checkAuth, foodsCtrl.getAllFoods);
+router.post('/:id/foods', checkAuth, foodsCtrl.createFood);
+router.put('/foods/:id', checkAuth, foodsCtrl.updateFood);
+router.delete('/foods/:id', checkAuth, foodsCtrl.deleteFood);
 
 /*----- Helper Functions -----*/
 function checkAuth(req, res, next) {

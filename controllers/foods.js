@@ -44,6 +44,7 @@ async function updateFood(req, res) {
   orders.forEach(function(oneOrder) {
     oneOrder.food_items.forEach(function(oneFood) {
       if(oneFood.id === req.params.id) {
+        console.log(oneFood.id);
         oneFood.quantity = req.body.quantity;
         customer.save();
         //return updated food list
@@ -65,7 +66,7 @@ async function deleteFood(req, res) {
         const deletedFood = oneOrder.food_items.splice(idx, 1);
         console.log(deletedFood);
         customer.save();
-        return res.json(deletedFood);
+        return res.json(oneOrder.food_items);
       }
     });
   });
