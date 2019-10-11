@@ -36,7 +36,6 @@ class App extends Component {
     customerService.logout();
     this.setState({ customer: null });
   }
-  
 
   render() {
     return (
@@ -45,6 +44,7 @@ class App extends Component {
           <NavBar
             customer={this.state.customer}
             handleLogout={this.handleLogout}
+     
           />
         </header>
 
@@ -52,11 +52,15 @@ class App extends Component {
           <Route exact path='/' render={() =>
             <section className="container">
               <div className="row">
-                {this.state.restaurant_menus.map((restaurant, idx) =>
-                  <div key={idx} className="col-md-4">
-                    <RestaurantCard restaurant={restaurant} idx={idx} />
-                  </div>
-                )}
+                {this.state.restaurant_menus ? 
+                  this.state.restaurant_menus.map((restaurant, idx) =>
+                    <div key={idx} className="col-md-4">
+                      <RestaurantCard restaurant={restaurant} idx={idx} />
+                    </div>
+                  )
+                  :
+                  <div>Loading...</div>
+                }
               </div>
             </section>
           } />
@@ -76,6 +80,7 @@ class App extends Component {
             />
           }
           } />
+          <Route path="/orders/:id" component={OrderPage} />
           <Route exact path='/signup' render={({ history }) =>
             <SignupPage
               history={history}
@@ -90,7 +95,7 @@ class App extends Component {
           } />
 
         </Switch>
-        <footer className="footer bg-light">
+        <footer className="footer">
           Taste-It  <i className="far fa-grin-wink"></i>
         </footer>
       </div>
