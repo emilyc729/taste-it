@@ -15,7 +15,7 @@ const NavBar = (props) => {
           <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <Link to='/orders' className="dropdown-item">View Orders</Link>
             <Link to='' className="dropdown-item">All Restaurants</Link>
-            <Link to='' className="dropdown-item" onClick={props.handleLogout}>LOG OUT</Link>
+            <Link to='' className="dropdown-item" onClick={props.handleLogout}><button className="btn btn-outline-primary">Logout</button></Link>
           </div>
         </div>
       </nav>
