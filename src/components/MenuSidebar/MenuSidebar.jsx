@@ -11,7 +11,13 @@ const MenuSidebar = (props) => {
                     <div className={`collapse ${menu.name}${menu.id}`}>
                     {menu.categories.map((category, idx) =>
                         <div key={`${category.name}${category.id}`}>
-                            <Link to={`${props.location.pathname}#${category.name}`}>{category.name}</Link>
+                            <a  
+                                href={`#${category.name}`}
+                                onClick={() => props.handleSelection(category.name)}
+                                className={props.categorySelected === category.name ? 'active' : ''}
+                            >
+                                {category.name}
+                            </a>
                         </div>
                     )}
                     </div>

@@ -8,16 +8,17 @@ class Menu extends Component {
 
     render() {
         return (
-            <div className="Menu">
+            <div className="Menu container">
                 {this.props.categories.map((category, idx) =>
                     <div key={category.name}>
-                        <h3 className="text-center mt-4" name={category.name}>{category.name}</h3>
+                        <h3 id={category.name} className="text-center mt-4" name={category.name}>{category.name}</h3>
                         <div className="row">
                         {category.foods.map((food, idx) =>
                             <FoodCard
                                 key={food.id}
                                 {...this.props} 
-                                food={food} 
+                                food={food}
+                                customer={this.props.customer} 
                             />
                         )}
                         </div>
