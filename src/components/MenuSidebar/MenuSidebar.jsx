@@ -1,6 +1,5 @@
 import React from 'react';
 import './MenuSidebar.css';
-import {HashLink as Link} from 'react-router-hash-link'
 
 const MenuSidebar = (props) => {
     return (
