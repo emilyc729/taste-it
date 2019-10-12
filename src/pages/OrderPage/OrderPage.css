@@ -1,5 +1,5 @@
 .OrderPage {
-    padding-top: 75px;
+    padding: 75px 0 ;
 }
 
 .orderList {
@@ -29,4 +29,9 @@
 .linkBtn {
     border: 1px solid black;
     margin: 0 3px;
+}
+
+.no-border td {
+    border: none;
+    text-align: right;
 }

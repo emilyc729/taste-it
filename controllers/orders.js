@@ -27,8 +27,9 @@ async function update(req, res) {
     if(req.params.id === order.id) {
       order.total_price = req.body.total_price;
       order.total_items = req.body.total_items;
-      const saveCustomer = await customer.save();
-      return res.json(saveCustomer.orders);
+      await customer.save();
+      console.log(order);
+      res.json(order);
     }
   });
 }

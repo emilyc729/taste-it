@@ -60,11 +60,41 @@ class OrderPage extends Component {
 
   getTotalItems = (order) => {
     let total_items = 0;
-    order.food_items.map((food) => {
+    order.food_items.forEach((food) => {
       total_items += food.quantity;
     });
     console.log(total_items);
     return total_items;
+  }
+
+  getSubtotalPrice = (order) => {
+    let subtotal = 0;
+    order.food_items.forEach((food) => {
+      subtotal += (food.price * food.quantity);
+    });
+    return subtotal.toFixed(2);
+  }
+
+  getGrandTotal = (order) => {
+    let grand_total = 0;
+    order.food_items.forEach((food) => {
+      grand_total += (food.price * food.quantity * 1.085);
+    });
+    return grand_total.toFixed(2);
+  }
+
+  saveOrder = async (order_id, order, orderIdx) => {
+    const orderList = this.state.customer_orders;
+    const obj = {
+      total_price: this.getGrandTotal(order),
+      total_items: this.getTotalItems(order)
+    }
+
+    const updatedOrder = await ordersApi.updateOrder(order_id, obj);
+    orderList[orderIdx] = updatedOrder;
+    
+    this.setState({customer_orders: orderList});
+    console.log(this.state.customer_orders);
   }
 
   render() {
@@ -117,11 +147,29 @@ class OrderPage extends Component {
                                   <td></td>
                                   <td>{this.getTotalItems(order)}</td>
                                   <td></td>
+                                  <td>${this.getSubtotalPrice(order)}</td>
                                   <td></td>
+                                </tr>
+                                <tr className="no-border">
+                                  <td>Tax</td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td>8.5%</td>
+                                  <td></td>
+                                </tr>
+                                <tr className="no-border">
+                                  <td>Total</td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td>${this.getGrandTotal(order)}</td>
                                   <td></td>
                                 </tr>
                               </tbody>
                             </table>
+                            <button className="btn btn-outline-success" onClick={() => this.saveOrder(order._id, order, orderIdx)}>Save Changes</button>
+                            <button className="btn btn-outline-success">Submit Order</button>
                           </div>
                           :
                           ''

@@ -25,7 +25,7 @@ function createOrder(order) {
 }
 
 function updateOrder(order_id, order) {
-    return fetch(`${BASE_URL}/orders/${order_id}`, {
+    return fetch(`${BASE_URL}/${order_id}`, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json',
