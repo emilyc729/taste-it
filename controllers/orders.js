@@ -3,6 +3,7 @@ const Customer = require('../models/customer');
 module.exports = {
   index,
   create,
+  update,
   delete: deleteOne
 };
 
@@ -20,6 +21,18 @@ async function create(req, res) {
   return res.json(saveCustomer.orders);
 }
 
+async function update(req, res) {
+  const customer = await Customer.findById(req.user._id);
+  customer.orders.forEach(async function(order, idx) {
+    if(req.params.id === order.id) {
+      order.total_price = req.body.total_price;
+      order.total_items = req.body.total_items;
+      const saveCustomer = await customer.save();
+      return res.json(saveCustomer.orders);
+    }
+  });
+}
+
 async function deleteOne(req, res) {
   const customer = await Customer.findById(req.user._id);
   customer.orders.forEach(async function(order, idx) {
@@ -28,5 +41,5 @@ async function deleteOne(req, res) {
       const saveCustomer = await customer.save();
       return res.json(saveCustomer.orders);
     }
-  })
+  });
 }

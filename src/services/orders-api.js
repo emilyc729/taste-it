@@ -24,6 +24,17 @@ function createOrder(order) {
     }).then(res => res.json());
 }
 
+function updateOrder(order_id, order) {
+    return fetch(`${BASE_URL}/orders/${order_id}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer ' + tokenService.getToken()
+        },
+        body: JSON.stringify(order)
+    }).then(res => res.json());
+}
+
 function deleteOrder(id) {
     return fetch(`${BASE_URL}/${id}`, {
         method: 'DELETE',
@@ -36,6 +47,7 @@ function deleteOrder(id) {
 
 export default {
     getAllOrders,
-    createOrder, 
+    createOrder,
+    updateOrder, 
     deleteOrder
 };

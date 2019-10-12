@@ -6,6 +6,7 @@ const ordersCtrl = require('../../controllers/orders');
 router.use(require('../../config/auth'));
 router.get('/', ordersCtrl.index);
 router.post('/', checkAuth, ordersCtrl.create);
+router.put('/:id', checkAuth, ordersCtrl.update);
 router.delete('/:id', checkAuth, ordersCtrl.delete);
 
 /*----- Helper Functions -----*/
