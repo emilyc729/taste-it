@@ -73,4 +73,5 @@ customerSchema.methods.comparePassword = function (tryPassword, cb) {
     });
 };
 
+
 module.exports = mongoose.model('Customer', customerSchema);

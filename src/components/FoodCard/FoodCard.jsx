@@ -8,7 +8,8 @@ class FoodCard extends Component {
     state = {
         quantity: 1,
         customer_orders: [],
-        order_foodList: []
+        order_foodList: [],
+        isFetching: false
     }
     
     async componentDidMount() {
@@ -29,7 +30,7 @@ class FoodCard extends Component {
 
     //create order for restaurant
     handleCreateOrder = async ()  => {
-
+        console.log('order created');
         const orderObj = {
             restaurant_name: this.props.restaurant.name,
             restaurant_id: this.props.restaurant.id,
@@ -57,8 +58,9 @@ class FoodCard extends Component {
             price: this.props.food.price,
             quantity: this.state.quantity
         }
-
+        this.state.isFetching = true;
         const addedFoods = await foodsApi.createFood(this.props.restaurant.id, foodObj);
+        this.state.isFetching = false;
         console.log(addedFoods);
         this.setState({order_foodList: addedFoods});
     }
@@ -136,7 +138,7 @@ class FoodCard extends Component {
 
      //'add to order' btn function
      createOrderOrAddItem = () => {
-        if(this.state.customer_orders && this.hasOrderCreated()) {
+        if(this.state.customer_orders && this.hasOrderCreated() && !this.state.isFetching) {
             if(this.hasFoodAdded()) {
                 console.log('update food quantity');
                 return this.updateQuantityOnFoodAdd();
