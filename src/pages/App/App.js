@@ -80,7 +80,7 @@ class App extends Component {
             />
           }
           } />
-          <Route path="/orders/:id" component={OrderPage} />
+          <Route exact path="/orders/:id" component={OrderPage} />
           <Route exact path='/signup' render={({ history }) =>
             <SignupPage
               history={history}

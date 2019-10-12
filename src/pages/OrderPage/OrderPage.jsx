@@ -12,18 +12,14 @@ class OrderPage extends Component {
   state = {
     quantity: 0,
     customer_orders: [],
-    // order_foodlist: [],
     condition: false,
 
   }
 
   async componentDidMount() {
     const customer_orders = await ordersApi.getAllOrders();
-    const order_foodlist = await foodsApi.getAllFoods(this.props.match.params.id);
-    
     this.setState({ 
       customer_orders: customer_orders, 
-      order_foodlist: order_foodlist
     });
   }
 
@@ -83,9 +79,9 @@ class OrderPage extends Component {
             
           )}
           </ul>
-          <Route path="/orders/:id" render={(props) => {
+          <Route exact path="/orders/:id" render={(props) => {
             return (
-            <div className="OrderContent">
+            <div className="OrderContent container">
               
               {this.state.customer_orders ?
                 this.state.customer_orders.map((order, orderIdx) =>
