@@ -35,13 +35,14 @@ function updateFood(food_id, food) {
     }).then(res => res.json());
 }
 
-function deleteFood(food_id) {
+function deleteFood(food_id, orderIdx) {
     return fetch(`${BASE_URL}/foods/${food_id}`, {
         method: 'DELETE',
         headers: {
             'content-type': 'application/json',
             'Authorization': 'Bearer ' + tokenService.getToken()
-        }
+        },
+        body: JSON.stringify(orderIdx)
     }).then(res => res.json());
 }
 
