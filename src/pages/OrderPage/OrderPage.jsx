@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, Link, NavLink} from 'react-router-dom';
+import { Route, Link, NavLink } from 'react-router-dom';
 import ordersApi from '../../services/orders-api';
 import foodsApi from '../../services/foods-api';
 import Order from '../../components/Order/Order';
@@ -18,8 +18,8 @@ class OrderPage extends Component {
 
   async componentDidMount() {
     const customer_orders = await ordersApi.getAllOrders();
-    this.setState({ 
-      customer_orders: customer_orders, 
+    this.setState({
+      customer_orders: customer_orders,
     });
   }
 
@@ -40,24 +40,32 @@ class OrderPage extends Component {
     })
   };
 
-  deleteFood = async (food_id, orderIdx, order) => {
+  deleteFood = async (food_id, orderIdx) => {
     console.log(food_id);
     const obj = {
-        orderIdx: orderIdx,
+      orderIdx: orderIdx,
     }
     const orderList = this.state.customer_orders;
-   
+
     const foodListCopy = this.state.customer_orders[orderIdx].food_items;
     const deletedFood = await foodsApi.deleteFood(food_id, obj);
     console.log(deletedFood);
     const updatedFoodlist = foodListCopy.filter((foodObj) => {
-        return foodObj.food_id !== deletedFood[0].food_id;
-    }) ;
+      return foodObj.food_id !== deletedFood[0].food_id;
+    });
     orderList[orderIdx].food_items = updatedFoodlist;
-  
-    this.setState({customer_orders: orderList});
-    console.log(this.state.order_foodlist);
-}
+
+    this.setState({ customer_orders: orderList });
+  }
+
+  getTotalItems = (order) => {
+    let total_items = 0;
+    order.food_items.map((food) => {
+      total_items += food.quantity;
+    });
+    console.log(total_items);
+    return total_items;
+  }
 
   render() {
 
@@ -68,59 +76,67 @@ class OrderPage extends Component {
           <div>
             <h1 className="text-center">Your Orders</h1>
             <ul className="nav nav-pills mb-3 orderList">
-            {this.state.customer_orders.map((order, idx) => 
-  
-              <li key={idx} className="nav-item parent">
-                
-                <NavLink activeClassName="active" to={`/orders/${order.restaurant_id}`} className={`nav-link linkBtn`}>
-                  {`${order.restaurant_name} Order`} 
-                </NavLink>
-              </li>
-            
-          )}
-          </ul>
-          <Route exact path="/orders/:id" render={(props) => {
-            return (
-            <div className="OrderContent container">
-              
-              {this.state.customer_orders ?
-                this.state.customer_orders.map((order, orderIdx) =>
-                <div key={`${order.restaurant_name}${orderIdx}`}>
-                  {order.restaurant_id === props.match.params.id ? 
-                    <div>
-                      <h3>Order#: {order.order_num}</h3>
-                      <button className="deleteBtn btn btn-sm btn-outline-danger" onClick={() => this.handleDeleteOrder(order._id)}>Delete Order</button>
-                      <table className="table table-hover mt-4">
-                          <thead>
-                            <tr>
-                              <th scope="col">#</th>
-                              <th scope="col">Item</th>
-                              <th scope="col">Quantity</th>
-                              <th scope="col">Price</th>
-                              <th scope="col">Total</th>
-                              <th scope="col"></th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                        {order.food_items.map((food, idx) =>
-                                <Order key={food._id} food={food} idx={idx} orderIdx={orderIdx} order={order} deleteFood={this.deleteFood} />
-                        )}
-                                   </tbody>
-                        </table>
-                    </div>
+              {this.state.customer_orders.map((order, idx) =>
+
+                <li key={idx} className="nav-item parent">
+
+                  <NavLink activeClassName="active" to={`/orders/${order.restaurant_id}`} className={`nav-link linkBtn`}>
+                    {`${order.restaurant_name} Order`}
+                  </NavLink>
+                </li>
+
+              )}
+            </ul>
+            <Route exact path="/orders/:id" render={(props) => {
+              return (
+                <div className="OrderContent container">
+                  {this.state.customer_orders ?
+                    this.state.customer_orders.map((order, orderIdx) =>
+                      <div key={`${order.restaurant_name}${orderIdx}`}>
+                        {order.restaurant_id === props.match.params.id ?
+                          <div>
+                            <h3>Order#: {order.order_num}</h3>
+                            <button className="deleteBtn btn btn-sm btn-outline-danger" onClick={() => this.handleDeleteOrder(order._id)}>Delete Order</button>
+                            <table className="table table-hover mt-4">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Item</th>
+                                  <th scope="col">Quantity</th>
+                                  <th scope="col">Price</th>
+                                  <th scope="col">Total</th>
+                                  <th scope="col"></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {order.food_items.map((food, idx) =>
+                                  <Order key={food._id} food={food} idx={idx} orderIdx={orderIdx} deleteFood={this.deleteFood} />
+                                )}
+                                <tr>
+                                  <td>SubTotal</td>
+                                  <td></td>
+                                  <td>{this.getTotalItems(order)}</td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          :
+                          ''
+                        }
+
+                      </div>
+                    )
                     :
-                    ''
+                    <div>Loading...</div>
                   }
-                  
+
                 </div>
-                )
-                :
-                <div>Loading...</div>
-              }
-       
-            </div>
-            )}
-          } />
+              )
+            }
+            } />
           </div>
           :
           <div>Loading...</div>

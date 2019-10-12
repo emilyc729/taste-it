@@ -83,7 +83,7 @@ class Order extends Component {
 
         return (
             <tr>
-                <th scope="row">{this.props.idx + 1}</th>
+                <td scope="row">{this.props.idx + 1}</td>
                 <td>{this.props.food.name}</td>
                 <td>
                     <div>
@@ -94,7 +94,7 @@ class Order extends Component {
                 </td>
                 <td>${this.props.food.price}</td>
                 <td>${(this.props.food.price * this.state.quantity).toFixed(2)}</td>
-                <td><i className="deleteFood btn far fa-trash-alt" onClick={() => this.props.deleteFood(this.props.food._id, this.props.orderIdx, this.props.order)}></i></td>
+                <td><i className="deleteFood btn far fa-trash-alt" onClick={() => this.props.deleteFood(this.props.food._id, this.props.orderIdx)}></i></td>
             </tr>
 
         );
