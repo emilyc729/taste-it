@@ -25,3 +25,8 @@
 .deleteFood {
     color:#dc3545;
 }
+
+.linkBtn {
+    border: 1px solid black;
+    margin: 0 3px;
+}

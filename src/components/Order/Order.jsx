@@ -7,14 +7,14 @@ import './Order.css';
 class Order extends Component {
     state = {
         quantity: this.props.food.quantity,
-        order_foodlist: [],
+        //order_foodlist: []
 
     }
 
-    async componentDidMount() {
-        const order_foodlist = await foodsApi.getAllFoods(this.props.food.restaurant_id);
-        this.setState({order_foodlist: order_foodlist});
-    }
+    // async componentDidMount() {
+    //     const order_foodlist = await foodsApi.getAllFoods(this.props.food.restaurant_id);
+    //     this.setState({order_foodlist: order_foodlist});
+    // }
 
     increaseQuantity = (food_id, curQuantity) => {
         //increase quantity by 1
@@ -61,12 +61,23 @@ class Order extends Component {
         });
     }
 
-    deleteFood = async () => {
-        console.log('hi');
-        const deletedFood = await foodsApi.deleteFood(this.props.food._id);
-     
-        this.setState({order_foodlist: deletedFood});
-    }
+    // deleteFood = async () => {
+    //     console.log('hi');
+    //     const obj = {
+    //         orderIdx: this.props.orderIdx,
+    //         foodIdx: this.props.idx
+    //     }
+    //     const foodListCopy = this.state.order_foodlist;
+    //     const deletedFood = await foodsApi.deleteFood(this.props.food._id, obj);
+    //     console.log(deletedFood);
+    //     const updatedFoodlist = foodListCopy.filter((foodObj) => {
+    //         return foodObj.food_id !== deletedFood[0].food_id;
+    //     }) ;
+    //     console.log(updatedFoodlist);
+    //     console.log(this.state);
+    //     this.setState({order_foodlist: updatedFoodlist});
+        
+    // }
 
     render() {
 
@@ -83,7 +94,7 @@ class Order extends Component {
                 </td>
                 <td>${this.props.food.price}</td>
                 <td>${(this.props.food.price * this.state.quantity).toFixed(2)}</td>
-                <td><i className="deleteFood btn far fa-trash-alt" onClick={this.deleteFood}></i></td>
+                <td><i className="deleteFood btn far fa-trash-alt" onClick={() => this.props.deleteFood(this.props.food._id, this.props.orderIdx, this.props.order)}></i></td>
             </tr>
 
         );

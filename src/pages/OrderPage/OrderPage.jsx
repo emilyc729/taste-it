@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Route, Link, NavLink} from 'react-router-dom';
 import ordersApi from '../../services/orders-api';
+import foodsApi from '../../services/foods-api';
 import Order from '../../components/Order/Order';
 
 import './OrderPage.css';
@@ -11,14 +12,19 @@ class OrderPage extends Component {
   state = {
     quantity: 0,
     customer_orders: [],
-    order_foodlist: [],
+    // order_foodlist: [],
     condition: false,
 
   }
 
   async componentDidMount() {
     const customer_orders = await ordersApi.getAllOrders();
-    this.setState({ customer_orders: customer_orders });
+    const order_foodlist = await foodsApi.getAllFoods(this.props.match.params.id);
+    
+    this.setState({ 
+      customer_orders: customer_orders, 
+      order_foodlist: order_foodlist
+    });
   }
 
   handleDeleteOrder = async (order_id) => {
@@ -38,6 +44,25 @@ class OrderPage extends Component {
     })
   };
 
+  deleteFood = async (food_id, orderIdx, order) => {
+    console.log(food_id);
+    const obj = {
+        orderIdx: orderIdx,
+    }
+    const orderList = this.state.customer_orders;
+   
+    const foodListCopy = this.state.customer_orders[orderIdx].food_items;
+    const deletedFood = await foodsApi.deleteFood(food_id, obj);
+    console.log(deletedFood);
+    const updatedFoodlist = foodListCopy.filter((foodObj) => {
+        return foodObj.food_id !== deletedFood[0].food_id;
+    }) ;
+    orderList[orderIdx].food_items = updatedFoodlist;
+  
+    this.setState({customer_orders: orderList});
+    console.log(this.state.order_foodlist);
+}
+
   render() {
 
     return (
@@ -51,7 +76,7 @@ class OrderPage extends Component {
   
               <li key={idx} className="nav-item parent">
                 
-                <NavLink activeClassName="active" to={`/orders/${order.restaurant_id}`} className={`nav-link`}>
+                <NavLink activeClassName="active" to={`/orders/${order.restaurant_id}`} className={`nav-link linkBtn`}>
                   {`${order.restaurant_name} Order`} 
                 </NavLink>
               </li>
@@ -63,8 +88,8 @@ class OrderPage extends Component {
             <div className="OrderContent">
               
               {this.state.customer_orders ?
-                this.state.customer_orders.map((order, idx) =>
-                <div key={`${order.restaurant_name}${idx}`}>
+                this.state.customer_orders.map((order, orderIdx) =>
+                <div key={`${order.restaurant_name}${orderIdx}`}>
                   {order.restaurant_id === props.match.params.id ? 
                     <div>
                       <h3>Order#: {order.order_num}</h3>
@@ -82,7 +107,7 @@ class OrderPage extends Component {
                           </thead>
                           <tbody>
                         {order.food_items.map((food, idx) =>
-                                <Order key={food._id} food={food} idx={idx} />
+                                <Order key={food._id} food={food} idx={idx} orderIdx={orderIdx} order={order} deleteFood={this.deleteFood} />
                         )}
                                    </tbody>
                         </table>
