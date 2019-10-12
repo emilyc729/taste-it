@@ -83,7 +83,7 @@ class Order extends Component {
 
         return (
             <tr>
-                <td scope="row">{this.props.idx + 1}</td>
+                <th scope="row">{this.props.idx + 1}</th>
                 <td>{this.props.food.name}</td>
                 <td>
                     <div>
