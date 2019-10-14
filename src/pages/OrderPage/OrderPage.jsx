@@ -95,6 +95,7 @@ class OrderPage extends Component {
 
     this.setState({ customer_orders: orderList });
     console.log(this.state.customer_orders);
+
   }
 
 
@@ -202,7 +203,7 @@ class OrderPage extends Component {
                                 </tr>
                               </tbody>
                             </table>
-                            <button className="btn btn-outline-success">Submit Order</button>
+                            <button className="btn btn-outline-success" onClick={() => this.saveOrder(order._id, order, orderIdx)}>Submit Order</button>
                           </div>
                           :
                           ''
