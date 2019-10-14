@@ -6,7 +6,7 @@ import './Order.css';
 
 class Order extends Component {
     state = {
-        quantity: this.props.food.quantity,
+       // quantity: this.props.food.quantity,
         //order_foodlist: []
 
     }
@@ -16,7 +16,7 @@ class Order extends Component {
     //     this.setState({order_foodlist: order_foodlist});
     // }
 
-    increaseQuantity = (food_id, curQuantity) => {
+    increaseQuantity = (order_id, food_id, curQuantity) => {
         //increase quantity by 1
         //let quantity = curQuantity + 1
         //const updatedFood = foodApi.updateFood(food_id, quantity);
@@ -32,27 +32,27 @@ class Order extends Component {
 
 
 
-    increment = async () => {
-        let addOne = this.state.quantity;
-        addOne++;
-        this.setState({quantity: addOne});
-        // const updateQuantity = {
-        //     quantity: addOne
-        // }
-        //const updatedFood = await foodsApi.updateFood(unique_foodId, updateQuantity);
-        //console.log(updatedFood);
-        //this.setState({ order_foodlist: updatedFood });
-        //console.log(this.state.order_foodlist);
-    }
+    // increment = async () => {
+    //     let addOne = this.state.quantity;
+    //     addOne++;
+    //     this.setState({quantity: addOne});
+    //     // const updateQuantity = {
+    //     //     quantity: addOne
+    //     // }
+    //     //const updatedFood = await foodsApi.updateFood(unique_foodId, updateQuantity);
+    //     //console.log(updatedFood);
+    //     //this.setState({ order_foodlist: updatedFood });
+    //     //console.log(this.state.order_foodlist);
+    // }
 
 
 
-    decrement = () => {
-        let minusOne = this.state.quantity;
-        if (minusOne > 1) minusOne--;
-        this.setState({ quantity: minusOne });
-        //console.log(this.state.quantity);
-    }
+    // decrement = () => {
+    //     let minusOne = this.state.quantity;
+    //     if (minusOne > 1) minusOne--;
+    //     this.setState({ quantity: minusOne });
+    //     //console.log(this.state.quantity);
+    // }
 
     handleChange = (e) => {
         console.log(e.target.name);
@@ -87,13 +87,13 @@ class Order extends Component {
                 <td>{this.props.food.name}</td>
                 <td>
                     <div>
-                        <button className="btn" onClick={() => this.decrement()}><i className="far fa-minus-square"></i></button>
-                        <input className="quantity" type="number" name={`quantity${this.props.food.id}`} value={this.state.quantity} onChange={this.handleChange} />
-                        <button className="btn" onClick={() => this.increment()}><i className="far fa-plus-square"></i></button>
+                        <button className="btn" onClick={() => this.props.decreaseQuantity(this.props.orderIdx, this.props.food._id, this.props.food.quantity)}><i className="far fa-minus-square"></i></button>
+                        <input className="quantity" type="number" name={`quantity${this.props.food._id}`} value={this.props.food.quantity} onChange={this.handleChange} />
+                        <button className="btn" onClick={() => this.props.increaseQuantity(this.props.orderIdx, this.props.food._id, this.props.food.quantity)}><i className="far fa-plus-square"></i></button>
                     </div>
                 </td>
                 <td>${this.props.food.price}</td>
-                <td>${(this.props.food.price * this.state.quantity).toFixed(2)}</td>
+                <td>${(this.props.food.price * this.props.food.quantity).toFixed(2)}</td>
                 <td><i className="deleteFood btn far fa-trash-alt" onClick={() => this.props.deleteFood(this.props.food._id, this.props.orderIdx)}></i></td>
             </tr>
 

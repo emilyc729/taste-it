@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link, NavLink } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
 import ordersApi from '../../services/orders-api';
 import foodsApi from '../../services/foods-api';
 import Order from '../../components/Order/Order';
@@ -92,9 +92,32 @@ class OrderPage extends Component {
 
     const updatedOrder = await ordersApi.updateOrder(order_id, obj);
     orderList[orderIdx] = updatedOrder;
-    
-    this.setState({customer_orders: orderList});
+
+    this.setState({ customer_orders: orderList });
     console.log(this.state.customer_orders);
+  }
+
+
+  increaseQuantity = async (order_id, food_id, curQuantity) => {
+    //increase quantity by 1
+    let orderList = this.state.customer_orders;
+    let obj = {
+      quantity: curQuantity + 1
+    }
+    const updatedFood = await foodsApi.updateFood(food_id, obj);
+    orderList[order_id].food_items = updatedFood;
+    this.setState({customer_orders: orderList})
+  }
+
+  decreaseQuantity = async (order_id, food_id, curQuantity) => {
+    //decrease quantity by 1
+    let orderList = this.state.customer_orders;
+    let obj = {
+      quantity: curQuantity - 1
+    }
+    const updatedFood = await foodsApi.updateFood(food_id, obj);
+    orderList[order_id].food_items = updatedFood;
+    this.setState({customer_orders: orderList})
   }
 
   render() {
@@ -140,7 +163,14 @@ class OrderPage extends Component {
                               </thead>
                               <tbody>
                                 {order.food_items.map((food, idx) =>
-                                  <Order key={food._id} food={food} idx={idx} orderIdx={orderIdx} deleteFood={this.deleteFood} />
+                                  <Order 
+                                    key={food._id} 
+                                    food={food} idx={idx} 
+                                    orderIdx={orderIdx} 
+                                    deleteFood={this.deleteFood}
+                                    increaseQuantity={this.increaseQuantity}
+                                    decreaseQuantity={this.decreaseQuantity}
+                                  />
                                 )}
                                 <tr>
                                   <td>SubTotal</td>
