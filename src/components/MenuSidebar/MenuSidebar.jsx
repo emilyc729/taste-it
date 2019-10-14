@@ -6,7 +6,7 @@ const MenuSidebar = (props) => {
         <div className='MenuSidebar'>
             {props.menus.map((menu, idx) =>
                 <div key={`${menu.name}${menu.id}`}>
-                    <h4 data-toggle="collapse" data-target={`.${menu.name.replace(/\s/g, '')}${menu.id}`}>{menu.name} <i className="fas fa-angle-down"></i></h4>
+                    <h4 className="pointer"data-toggle="collapse" data-target={`.${menu.name.replace(/\s/g, '')}${menu.id}`}>{menu.name} <i className="fas fa-angle-down"></i></h4>
                     <div className={`collapse ${menu.name.replace(/\s/g, '')}${menu.id}`}>
                         {menu.categories.map((category, idx) =>
                             

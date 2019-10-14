@@ -18,3 +18,7 @@ a:hover {
 .active {
     font-weight: bold;
 }
+
+.pointer:hover {
+    cursor: pointer;
+}
