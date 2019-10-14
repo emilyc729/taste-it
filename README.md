@@ -42,4 +42,5 @@ Trello: [Trello](https://trello.com/b/w9PC3xgA/full-stack-project)
 2. Allow users to checkout/purchase their orders
 3. Send their orders to corresponding restaurants
 4. Enhance app responsiveness/ user experience design
+5. Add user profile page
 
