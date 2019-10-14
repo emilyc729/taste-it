@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import foodsApi from '../../services/foods-api';
-//import { Link } from 'react-router-dom';
 import './Order.css';
 
 

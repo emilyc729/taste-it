@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import ordersApi from '../../services/orders-api';
-import foodsApi from '../../services/foods-api';
 import './FoodCard.css';
 
 
