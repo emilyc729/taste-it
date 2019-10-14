@@ -112,8 +112,9 @@ class OrderPage extends Component {
   decreaseQuantity = async (order_id, food_id, curQuantity) => {
     //decrease quantity by 1
     let orderList = this.state.customer_orders;
+    if(curQuantity > 1) curQuantity--;
     let obj = {
-      quantity: curQuantity - 1
+      quantity: curQuantity
     }
     const updatedFood = await foodsApi.updateFood(food_id, obj);
     orderList[order_id].food_items = updatedFood;
