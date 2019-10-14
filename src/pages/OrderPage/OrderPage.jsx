@@ -98,18 +98,19 @@ class OrderPage extends Component {
   }
 
 
-  increaseQuantity = async (order_id, food_id, curQuantity) => {
+  increaseQuantity = async (order, orderIdx, food_id, curQuantity) => {
     //increase quantity by 1
     let orderList = this.state.customer_orders;
     let obj = {
       quantity: curQuantity + 1
     }
     const updatedFood = await foodsApi.updateFood(food_id, obj);
-    orderList[order_id].food_items = updatedFood;
-    this.setState({customer_orders: orderList})
+    orderList[orderIdx].food_items = updatedFood;
+    this.setState({customer_orders: orderList});
+    this.saveOrder(order._id, order, orderIdx);
   }
 
-  decreaseQuantity = async (order_id, food_id, curQuantity) => {
+  decreaseQuantity = async (order, orderIdx, food_id, curQuantity) => {
     //decrease quantity by 1
     let orderList = this.state.customer_orders;
     if(curQuantity > 1) curQuantity--;
@@ -117,8 +118,9 @@ class OrderPage extends Component {
       quantity: curQuantity
     }
     const updatedFood = await foodsApi.updateFood(food_id, obj);
-    orderList[order_id].food_items = updatedFood;
-    this.setState({customer_orders: orderList})
+    orderList[orderIdx].food_items = updatedFood;
+    this.setState({customer_orders: orderList});
+    this.saveOrder(order._id, order, orderIdx);
   }
 
   render() {
@@ -168,6 +170,7 @@ class OrderPage extends Component {
                                     key={food._id} 
                                     food={food} idx={idx} 
                                     orderIdx={orderIdx} 
+                                    order={order}
                                     deleteFood={this.deleteFood}
                                     increaseQuantity={this.increaseQuantity}
                                     decreaseQuantity={this.decreaseQuantity}
@@ -199,7 +202,6 @@ class OrderPage extends Component {
                                 </tr>
                               </tbody>
                             </table>
-                            <button className="btn btn-outline-success" onClick={() => this.saveOrder(order._id, order, orderIdx)}>Save Changes</button>
                             <button className="btn btn-outline-success">Submit Order</button>
                           </div>
                           :
