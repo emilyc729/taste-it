@@ -39,7 +39,9 @@ class FoodCard extends Component {
             total_price: 0,
             food_items: []
         }
+        this.state.isFetching = true;
         const newOrder = await ordersApi.createOrder(orderObj);
+        this.state.isFetching = false;
         console.log(newOrder);
     
         this.setState({customer_orders: newOrder});
@@ -146,7 +148,9 @@ class FoodCard extends Component {
                 return this.handleAddFoodItem();
             }
         } else {
-            return this.handleCreateOrder();
+            if(!this.state.isFetching) {
+                return this.handleCreateOrder();
+            }
         }
     }
 
