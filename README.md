@@ -10,7 +10,7 @@ Taste-It is a React, fullstack app which allows customers/users to view restaura
 3. Orders
 ![Orders](https://i.imgur.com/zZXxOSR.png)
 4. Restaurant Menu w/o Login
-![Menu w/o Login](https://i.imgur.com/52KALeF.png)
+![Menu w/o Login](https://i.imgur.com/52KALeF.png?1)
 
 
 ## Technologies Used
