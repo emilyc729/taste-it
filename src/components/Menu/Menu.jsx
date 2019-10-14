@@ -76,12 +76,12 @@ class Menu extends Component {
         ///[{restaurant_id}]
        for(var i = 0; i < this.state.customer_orders.length; i++) {
            if(parseInt(this.state.customer_orders[i].restaurant_id) === this.props.restaurant.id) {
-               console.log('true');
+               console.log('Order true');
               return true;
            } 
            
        }
-       console.log('false');
+       console.log('order false');
        return false;
     }
 
@@ -92,12 +92,12 @@ class Menu extends Component {
         for(var i = 0; i < this.state.order_foodList.length; i++) {
             console.log(this.state.order_foodList[i].food_id);
             if(parseInt(this.state.order_foodList[i].food_id) === food.id) {
-                console.log('true');
+                console.log('food true');
                 return true;
             } 
             
         }
-        console.log('false');
+        console.log('food false');
         return false;
     }
 
@@ -125,17 +125,20 @@ class Menu extends Component {
 
      //'add to order' btn function
      createOrderOrAddItem = (food, quantity) => {
-        if(this.state.customer_orders && this.hasOrderCreated() && !this.state.isFetching) {
+        if(this.state.customer_orders && this.hasOrderCreated()) {
             if(this.hasFoodAdded(food)) {
                 console.log('update food quantity');
                 return this.updateQuantityOnFoodAdd(food, quantity);
             } else {
-                return this.handleAddFoodItem(food, quantity);
+                if(!this.state.isFetching) {
+                    return this.handleAddFoodItem(food, quantity);
+                }
             }
+         
         } else {
-           // if(!this.state.isFetching) {
+            //if(!this.state.isFetching) {
                 return this.handleCreateOrder(food, quantity);
-           // }
+            //}
         }
     }
 
