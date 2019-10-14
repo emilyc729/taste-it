@@ -44,4 +44,6 @@ Trello: [Trello](https://trello.com/b/w9PC3xgA/full-stack-project)
 3. Send their orders to corresponding restaurants
 4. Enhance app responsiveness/ user experience design
 5. Add user profile page
+6. Add toggle-able sidebar 
+7. Add search bar
 
