@@ -30,6 +30,7 @@ Taste-It allows customers/users to view restaurant menus and order food online f
 ## Getting Started
 ### Links
 Deployed Link: [Taste-It](https://ec-tasteit.herokuapp.com/)
+<br />
 Trello: [Trello](https://trello.com/b/w9PC3xgA/full-stack-project)
 
 
