@@ -1,5 +1,5 @@
 # Taste-It
-Taste-It allows customers/users to view restaurant menus and order food online from restaurants that have added their menus at the [Tasty](https://menunav.herokuapp.com/) Website/App! Users who sign up may make food purchases from different restaurants at a time, while non-account users may only view restaurant menus.
+Taste-It is a React, fullstack app which allows customers/users to view restaurant menus and order food online from restaurants that have added their menus at the [Tasty](https://menunav.herokuapp.com/) Website/App! Users who sign up may make food purchases from different restaurants at a time, while non-account users may only view restaurant menus.
 
 
 ## Screenshots
