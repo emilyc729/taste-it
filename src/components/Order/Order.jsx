@@ -19,9 +19,9 @@ class Order extends Component {
                 <td>{this.props.food.name}</td>
                 <td>
                     <div>
-                        <button className="btn" onClick={() => this.props.decreaseQuantity(this.props.order, this.props.orderIdx, this.props.food._id, this.props.food.quantity)}><i className="far fa-minus-square"></i></button>
+                        <button className="btn Order-btn" onClick={() => this.props.decreaseQuantity(this.props.order, this.props.orderIdx, this.props.food._id, this.props.food.quantity)}><i className="far fa-minus-square"></i></button>
                         <input className="quantity" type="number" name={`quantity${this.props.food._id}`} value={this.props.food.quantity} onChange={this.handleChange} />
-                        <button className="btn" onClick={() => this.props.increaseQuantity(this.props.order, this.props.orderIdx, this.props.food._id, this.props.food.quantity)}><i className="far fa-plus-square"></i></button>
+                        <button className="btn Order-btn" onClick={() => this.props.increaseQuantity(this.props.order, this.props.orderIdx, this.props.food._id, this.props.food.quantity)}><i className="far fa-plus-square"></i></button>
                     </div>
                 </td>
                 <td>${this.props.food.price}</td>

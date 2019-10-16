@@ -32,6 +32,7 @@ class MenuPage extends Component {
                         {...this.props} 
                         categories={menu.categories}
                         restaurant={this.props.restaurant}
+                        restaurantIdx={this.props.match.params.idx}
                         customer={this.props.customer}
                         categorySelected={this.state.categorySelected}
                     />

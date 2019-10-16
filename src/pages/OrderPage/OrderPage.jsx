@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, NavLink } from 'react-router-dom';
+import { Route, NavLink, Link } from 'react-router-dom';
 import ordersApi from '../../services/orders-api';
 import foodsApi from '../../services/foods-api';
 import Order from '../../components/Order/Order';
@@ -147,11 +147,13 @@ class OrderPage extends Component {
             <Route exact path="/orders/:id" render={(props) => {
               return (
                 <div className="OrderContent container">
+                  <div className="row">
                   {this.state.customer_orders ?
                     this.state.customer_orders.map((order, orderIdx) =>
                       <div key={`${order.restaurant_name}${orderIdx}`}>
                         {order.restaurant_id === props.match.params.id ?
                           <div>
+                            <Link className="OrderPage-name" to={`/restaurant/${order.restaurant_id}/${order.restaurantIdx}`}>{order.restaurant_name}</Link>
                             <h3>Order#: {order.order_num}</h3>
                             <button className="deleteBtn btn btn-sm btn-outline-danger" onClick={() => this.handleDeleteOrder(order._id)}>Delete Order</button>
                             <table className="table table-hover mt-4">
@@ -186,7 +188,7 @@ class OrderPage extends Component {
                                   <td></td>
                                 </tr>
                                 <tr className="no-border">
-                                  <td>Tax</td>
+                                  <td>SF Tax</td>
                                   <td></td>
                                   <td></td>
                                   <td></td>
@@ -213,8 +215,9 @@ class OrderPage extends Component {
                     )
                     :
                     <div>Loading...</div>
-                  }
 
+                  }
+                  </div>
                 </div>
               )
             }

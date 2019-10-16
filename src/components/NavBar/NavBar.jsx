@@ -8,13 +8,12 @@ const NavBar = (props) => {
 
       <nav className="navbar navbar-expand-lg navbar-light d-flex justify-content-between">
         <Link to='' className="navbar-brand"><i className="far fa-grin-wink"></i> Taste-It</Link>
-        <h4>Welcome, {props.customer.name}</h4>
         <div className="dropdown">
           <button className="btn btn-outline-success" id="navbarDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span className="fas fa-utensils"></span>
           </button>
           <div className="dropdown-menu dropdown-menu-right mt-1" aria-labelledby="navbarDropdown">
-            
+            <h5 className="dropdown-item">Hi, {props.customer.name}</h5>
             <Link to='/orders' className="dropdown-item">View Orders</Link>
             <Link to='' className="dropdown-item">Restaurants</Link>
             <Link to='' className="dropdown-item" onClick={props.handleLogout}><button className="btn btn-outline-primary">Logout</button></Link>
@@ -30,7 +29,7 @@ const NavBar = (props) => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div className="collapse navbar-collapse " id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
               <Link to='/login' className='nav-link'>Login</Link>

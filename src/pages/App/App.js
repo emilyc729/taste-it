@@ -76,7 +76,7 @@ class App extends Component {
           <Route exact path='/orders' render={(props) => {
             return <OrderPage
               {...props}
-              //orders={this.state.customer.orders}
+              restaurant_menus={this.state.restaurant_menus}
             />
           }
           } />

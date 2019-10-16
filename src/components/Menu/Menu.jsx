@@ -33,6 +33,7 @@ class Menu extends Component {
         const orderObj = {
             restaurant_name: this.props.restaurant.name,
             restaurant_id: this.props.restaurant.id,
+            restaurantIdx: this.props.restaurantIdx,
             order_num: this.genRandomOrderNum(),
             total_items: quantity,
             total_price: (food.price * quantity),
