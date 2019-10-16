@@ -17,6 +17,7 @@ const foodSchema = new Schema({
 const orderSchema = new Schema({
     restaurant_name: String,
     restaurant_id: String,
+    restaurantIdx: Number,
     order_num: String,
     total_price: Number,
     total_items: Number,
