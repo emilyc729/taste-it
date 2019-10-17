@@ -14,10 +14,10 @@ async function getAllFoods(req, res) {
   //console.log(req.user);
   const customer = await Customer.findById(req.user._id);
   const orders = customer.orders;
-  orders.forEach(function(oneOrder) {
+  orders.forEach(async function(oneOrder) {
     if(oneOrder.restaurant_id === req.params.id) {
       //returns food list
-      const getFoodList = oneOrder.food_items;
+      const getFoodList = await oneOrder.food_items;
       return res.json(getFoodList);
     }
   });
