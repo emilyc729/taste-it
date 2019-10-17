@@ -218,7 +218,7 @@ class OrderPage extends Component {
         } */}
         <div className="row">
 
-          {this.state.customer_orders ?
+          {this.state.customer_orders.length ?
 
             this.state.customer_orders.map((order, orderIdx) =>
 
@@ -311,7 +311,7 @@ class OrderPage extends Component {
 
             )
             :
-            <h1>You have no orders yet!</h1>
+            <h5 className="text-center col-lg-12">You have no orders yet!</h5>
 
           }
         </div>
