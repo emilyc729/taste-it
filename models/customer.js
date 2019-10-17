@@ -15,6 +15,9 @@ const foodSchema = new Schema({
 });
 
 const orderSchema = new Schema({
+    customer_name: String,
+    email: String,
+    phone: String,
     restaurant_name: String,
     restaurant_id: String,
     restaurantIdx: Number,

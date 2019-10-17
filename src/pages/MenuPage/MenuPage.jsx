@@ -33,6 +33,9 @@ class MenuPage extends Component {
     handleCreateOrder = async (food, quantity)  => {
         console.log('order created');
         const orderObj = {
+            customer_name: this.props.customer.name,
+            email: this.props.customer.email,
+            phone: this.props.customer.phone,
             restaurant_name: this.props.restaurant.name,
             restaurant_id: this.props.restaurant.id,
             restaurantIdx: this.props.match.params.idx,
@@ -180,7 +183,7 @@ class MenuPage extends Component {
                 Loading...
             </div>
         return (
-            <div className="MenuPage">
+            <div className="MenuPage container">
             {menu}
             </div>
         );
