@@ -12,7 +12,6 @@ class OrderPage extends Component {
   state = {
     quantity: 0,
     customer_orders: [],
-    condition: false,
 
   }
 
@@ -23,6 +22,7 @@ class OrderPage extends Component {
     });
   }
 
+  //delete order
   handleDeleteOrder = async (order_id) => {
     console.log(order_id);
     const orderDeleted = await ordersApi.deleteOrder(order_id);
@@ -30,16 +30,7 @@ class OrderPage extends Component {
     this.setState({ customer_orders: orderDeleted });
   }
 
-
-  handleClick = (e) => {
-
-    console.log('The link was clicked.');
-    console.log(e);
-    this.setState({
-      condition: true
-    })
-  };
-
+  //delete food from order
   deleteFood = async (food_id, orderIdx) => {
     console.log(food_id);
     const obj = {
@@ -58,6 +49,7 @@ class OrderPage extends Component {
     this.setState({ customer_orders: orderList });
   }
 
+  //get total items in order
   getTotalItems = (order) => {
     let total_items = 0;
     order.food_items.forEach((food) => {
@@ -67,6 +59,7 @@ class OrderPage extends Component {
     return total_items;
   }
 
+  //get order's subtotal
   getSubtotalPrice = (order) => {
     let subtotal = 0;
     order.food_items.forEach((food) => {
@@ -75,6 +68,7 @@ class OrderPage extends Component {
     return subtotal.toFixed(2);
   }
 
+   //get order's grand total
   getGrandTotal = (order) => {
     let grand_total = 0;
     order.food_items.forEach((food) => {
@@ -83,6 +77,7 @@ class OrderPage extends Component {
     return grand_total.toFixed(2);
   }
 
+  //submit order/send order
   submitOrder = async (order_id, order, orderIdx) => {
     const orderList = this.state.customer_orders;
     const obj = {
@@ -98,7 +93,7 @@ class OrderPage extends Component {
 
   }
 
-
+  //update increase specific food quantity in order
   increaseQuantity = async (order, orderIdx, food_id, curQuantity) => {
     //increase quantity by 1
     let orderList = this.state.customer_orders;
@@ -111,6 +106,7 @@ class OrderPage extends Component {
     this.saveOrder(order._id, order, orderIdx);
   }
 
+   //update decrease specific food quantity in order
   decreaseQuantity = async (order, orderIdx, food_id, curQuantity) => {
     //decrease quantity by 1
     let orderList = this.state.customer_orders;

@@ -106,6 +106,7 @@ class MenuPage extends Component {
         return false;
     }
 
+    //update quantity of food if already in order
     updateQuantityOnFoodAdd = async (food, quantity) => {
 
         let savedQuantity = 0;
@@ -147,6 +148,7 @@ class MenuPage extends Component {
         }
     }
 
+    //sidebar anchor relative link
     handleSelection = (category) => {
         console.log(category);
         this.setState({categorySelected: category});
