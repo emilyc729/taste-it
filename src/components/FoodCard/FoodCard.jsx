@@ -8,18 +8,15 @@ class FoodCard extends Component {
     }
 
     increment = () => {
-        //console.log('hi');
         let addOne = this.state.quantity;
         if(addOne < 15) addOne++;
         this.setState({quantity: addOne});
-        //console.log(this.state.quantity);
     }
 
     decrement = () => {
         let minusOne = this.state.quantity;
         if(minusOne > 1) minusOne--;
         this.setState({quantity: minusOne});
-        //console.log(this.state.quantity);
     }
 
     handleChange = (e) => {

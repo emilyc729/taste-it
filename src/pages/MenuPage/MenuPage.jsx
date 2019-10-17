@@ -41,9 +41,8 @@ class MenuPage extends Component {
             total_price: (food.price * quantity),
             food_items: []
         }
-        //this.state.isFetching = true;
+ 
         const newOrder = await ordersApi.createOrder(orderObj);
-       // this.state.isFetching = false;
         console.log(newOrder);
     
         this.setState({customer_orders: newOrder});
@@ -168,8 +167,6 @@ class MenuPage extends Component {
                     <Menu
                         {...this.props} 
                         categories={menu.categories}
-                        //restaurant={this.props.restaurant}
-                        //restaurantIdx={this.props.match.params.idx}
                         customer={this.props.customer}
                         categorySelected={this.state.categorySelected}
                         createOrderOrAddItem={this.createOrderOrAddItem}
