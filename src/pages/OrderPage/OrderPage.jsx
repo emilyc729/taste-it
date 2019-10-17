@@ -24,23 +24,18 @@ class OrderPage extends Component {
 
   //delete order
   handleDeleteOrder = async (order_id) => {
-    console.log(order_id);
     const orderDeleted = await ordersApi.deleteOrder(order_id);
-    console.log(orderDeleted);
     this.setState({ customer_orders: orderDeleted });
   }
 
   //delete food from order
   deleteFood = async (food_id, orderIdx) => {
-    console.log(food_id);
     const obj = {
       orderIdx: orderIdx,
     }
     const orderList = this.state.customer_orders;
-
     const foodListCopy = this.state.customer_orders[orderIdx].food_items;
     const deletedFood = await foodsApi.deleteFood(food_id, obj);
-    console.log(deletedFood);
     const updatedFoodlist = foodListCopy.filter((foodObj) => {
       return foodObj.food_id !== deletedFood[0].food_id;
     });
@@ -55,7 +50,6 @@ class OrderPage extends Component {
     order.food_items.forEach((food) => {
       total_items += food.quantity;
     });
-    console.log(total_items);
     return total_items;
   }
 

@@ -14,8 +14,6 @@ class MenuPage extends Component {
     }
 
     async componentDidMount() {
-
-        console.log(this.props.match.params.id);
         const customer_orders = await ordersApi.getAllOrders();
         const order_foodList = await foodsApi.getAllFoods(this.props.match.params.id);
         this.setState({
@@ -46,19 +44,14 @@ class MenuPage extends Component {
         }
  
         const newOrder = await ordersApi.createOrder(orderObj);
-        console.log(newOrder);
     
         this.setState({customer_orders: newOrder});
-        console.log(this.state.customer_orders);
         this.handleAddFoodItem(food, quantity);
     
-        
-
     }
 
     //create food item and add to pertaining restaurant order
     handleAddFoodItem = async (food, quantity) => {
-        console.log(food);
         console.log('added food to order');
         const foodObj = {
             restaurant_id: this.props.restaurant.id,
@@ -70,39 +63,27 @@ class MenuPage extends Component {
         this.state.isFetching = true;
         const addedFoods = await foodsApi.createFood(this.props.restaurant.id, foodObj);
         this.state.isFetching = false;
-        console.log(addedFoods);
         this.setState({order_foodList: addedFoods});
     }
 
 
     //check if restaurant already has an order
     hasOrderCreated = () => {
-        //check if restaurant.id already exits in arry of order objs
-        ///[{restaurant_id}]
        for(var i = 0; i < this.state.customer_orders.length; i++) {
            if(parseInt(this.state.customer_orders[i].restaurant_id) === this.props.restaurant.id) {
-               console.log('Order true');
               return true;
-           } 
-           
+           }  
        }
-       console.log('order false');
        return false;
     }
 
     //check if food-item already exists in restaurant's order
     hasFoodAdded = (food) => {
-        console.log(this.state.order_foodList);
-        console.log(food.id);
         for(var i = 0; i < this.state.order_foodList.length; i++) {
-            console.log(this.state.order_foodList[i].food_id);
             if(parseInt(this.state.order_foodList[i].food_id) === food.id) {
-                console.log('food true');
                 return true;
-            } 
-            
+            }   
         }
-        console.log('food false');
         return false;
     }
 
@@ -116,12 +97,10 @@ class MenuPage extends Component {
             if(parseInt(this.state.order_foodList[i].food_id) === food.id) {
                 savedQuantity = this.state.order_foodList[i].quantity;
                 total = savedQuantity + curQuantity;
-                console.log(total);
                 const updateQuantity = {
                     quantity: total
                 }
                 const updatedFood = await foodsApi.updateFood(this.state.order_foodList[i]._id, updateQuantity);
-                console.log(updatedFood);
                 this.setState({order_foodList: updatedFood});
             } 
         }
@@ -142,15 +121,12 @@ class MenuPage extends Component {
             }
          
         } else {
-            //if(!this.state.isFetching) {
-                return this.handleCreateOrder(food, quantity);
-            //}
+            return this.handleCreateOrder(food, quantity);
         }
     }
 
     //sidebar anchor relative link
     handleSelection = (category) => {
-        console.log(category);
         this.setState({categorySelected: category});
     }
     
