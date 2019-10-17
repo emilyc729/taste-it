@@ -1,5 +1,6 @@
 .OrderPage {
-    padding: 75px 0 ;
+    padding-top: 75px;
+    padding-bottom: 75px;
 }
 
 .OrderPage-name {
@@ -22,7 +23,10 @@
 
 .deleteButton {
     margin-left: 30px;
-    
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
 }
 .parent {
  position: relative;
@@ -30,6 +34,7 @@
 
 .deleteFood {
     color:#dc3545;
+    padding: 0;
 }
 
 .linkBtn {
@@ -40,4 +45,19 @@
 .no-border td {
     border: none;
     text-align: right;
+}
+
+.OrderPage-sm-table {
+    text-align: right;
+    float: right;
+    
+
+}
+
+.OrderPage-order-num {
+    display: block;
+}
+
+.OrderPage .modal-body {
+    padding: 0 0.3rem 0.3rem 0.3rem;
 }
