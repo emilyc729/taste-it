@@ -27,7 +27,17 @@
     top: 0;
     right: 0;
     z-index: 1;
+    padding: .20rem .5rem;
+    font-size: .50rem;
+    border: none;
 }
+
+.deleteButton:hover {
+    background-color: transparent;
+    border: none;
+    color: grey;
+}
+
 .parent {
  position: relative;
 }

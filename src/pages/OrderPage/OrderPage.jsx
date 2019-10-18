@@ -10,7 +10,6 @@ import './OrderPage.css';
 
 class OrderPage extends Component {
   state = {
-    quantity: 0,
     customer_orders: [],
 
   }
@@ -97,7 +96,7 @@ class OrderPage extends Component {
     const updatedFood = await foodsApi.updateFood(food_id, obj);
     orderList[orderIdx].food_items = updatedFood;
     this.setState({ customer_orders: orderList });
-    this.saveOrder(order._id, order, orderIdx);
+    this.submitOrder(order._id, order, orderIdx);
   }
 
    //update decrease specific food quantity in order
@@ -111,7 +110,7 @@ class OrderPage extends Component {
     const updatedFood = await foodsApi.updateFood(food_id, obj);
     orderList[orderIdx].food_items = updatedFood;
     this.setState({ customer_orders: orderList });
-    this.saveOrder(order._id, order, orderIdx);
+    this.submitOrder(order._id, order, orderIdx);
   }
 
   render() {
@@ -225,8 +224,8 @@ class OrderPage extends Component {
 
               <div key={order.order_num} className="col-sm-12 col-md-4 mt-3">
                 <div className="parent mb-4">
-                  <button className="deleteButton btn btn-sm btn-outline-danger" onClick={() => this.handleDeleteOrder(order._id)}><i className="fas fa-times"></i></button>
-
+                  <button className="deleteButton btn btn-sm btn-outline-danger" onClick={() => this.handleDeleteOrder(order._id)} data-toggle="tooltip" data-placement="top" title="Delete Order"><i className="fas fa-times"></i></button>
+                
                   <div className="card" data-toggle="modal" data-target={`.${order.name}${order.order_num}`}>
                     <div className="card-body">
                       <h6 className="card-title">{order.restaurant_name} Order</h6>

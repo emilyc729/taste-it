@@ -29,7 +29,7 @@ class FoodCard extends Component {
         return (
             <div key={this.props.food.name} className="col-md-6 col-lg-4">
                 <div className="card mt-4">
-                    <img src={this.props.food.food_photo} className="card-img-top" alt={this.props.food.description} />
+                    <img src={this.props.food.food_photo} className="card-img-top" alt={this.props.food.description} data-toggle="tooltip" data-placement="top" title={this.props.food.description} />
                     <div className="card-body">
                         <h5 className="card-title d-flex justify-content-between">
                             <span>{this.props.food.name}</span>
