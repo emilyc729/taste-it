@@ -1,17 +1,17 @@
 .MenuSidebar {
     position: fixed;
     padding: 75px 0 75px 15px;
-    
+    z-index: 3;
     top: 0;
     bottom: 0;
 }
 
-a {
+.MenuSidebar a {
     display: block;
     text-decoration: none;
 }
 
-a:hover {
+.MenuSidebar a:hover {
     text-decoration: none;
 }
 
@@ -21,4 +21,8 @@ a:hover {
 
 .pointer:hover {
     cursor: pointer;
+}
+
+#collapse-sidebar {
+    background-color: rgba(255, 255, 255, 0.24);
 }

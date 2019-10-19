@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route, NavLink, Link } from 'react-router-dom';
 import ordersApi from '../../services/orders-api';
 import foodsApi from '../../services/foods-api';
 import Order from '../../components/Order/Order';
@@ -118,103 +117,6 @@ class OrderPage extends Component {
     return (
       <div className="OrderPage container">
         <h1 className="text-center">Your Orders</h1>
-        {/* {this.state.customer_orders ?
-          <div>
-            <h1 className="text-center">Your Orders</h1>
-            <ul className="nav nav-pills mb-3 orderList">
-              {this.state.customer_orders.map((order, idx) =>
-
-                <li key={idx} className="nav-item parent">
-
-                  <NavLink activeClassName="active" to={`/orders/${order.restaurant_id}`} className={`nav-link linkBtn`}>
-                    {`${order.restaurant_name} Order`}
-                  </NavLink>
-                </li>
-
-              )}
-            </ul>
-            <Route exact path="/orders/:id" render={(props) => {
-              return (
-                <div className="OrderContent container">
-                  <div className="row">
-                    {this.state.customer_orders ?
-                      this.state.customer_orders.map((order, orderIdx) =>
-                        <div key={`${order.restaurant_name}${orderIdx}`}>
-                          {order.restaurant_id === props.match.params.id ?
-                            <div>
-                              <Link className="OrderPage-name" to={`/restaurant/${order.restaurant_id}/${order.restaurantIdx}`}>{order.restaurant_name}</Link>
-                              <h3>Order#: {order.order_num}</h3>
-                              <button className="deleteBtn btn btn-sm btn-outline-danger" onClick={() => this.handleDeleteOrder(order._id)}>Delete Order</button>
-                              <table className="table table-hover mt-4">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Item</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Total</th>
-                                    <th scope="col"></th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {order.food_items.map((food, idx) =>
-                                    <Order
-                                      key={food._id}
-                                      food={food} idx={idx}
-                                      orderIdx={orderIdx}
-                                      order={order}
-                                      deleteFood={this.deleteFood}
-                                      increaseQuantity={this.increaseQuantity}
-                                      decreaseQuantity={this.decreaseQuantity}
-                                    />
-                                  )}
-                                  <tr>
-                                    <td>SubTotal</td>
-                                    <td></td>
-                                    <td>{this.getTotalItems(order)}</td>
-                                    <td></td>
-                                    <td>${this.getSubtotalPrice(order)}</td>
-                                    <td></td>
-                                  </tr>
-                                  <tr className="no-border">
-                                    <td>SF Tax</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>8.5%</td>
-                                    <td></td>
-                                  </tr>
-                                  <tr className="no-border">
-                                    <td>Total</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>${this.getGrandTotal(order)}</td>
-                                    <td></td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                              <button className="btn btn-outline-success" onClick={() => this.saveOrder(order._id, order, orderIdx)}>Submit Order</button>
-                            </div>
-                            :
-                            ''
-                          }
-
-                        </div>
-                      )
-                      :
-                      <div>Loading...</div>
-
-                    }
-                  </div>
-                </div>
-              )
-            }
-            } />
-          </div>
-          :
-          <div>Loading...</div>
-        } */}
         <div className="row">
 
           {this.state.customer_orders.length ?
