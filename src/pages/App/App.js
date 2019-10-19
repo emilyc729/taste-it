@@ -21,7 +21,6 @@ class App extends Component {
 
   async componentDidMount() {
     const restaurant_menus = await menuApi.getAllMenus();
-    console.log(restaurant_menus.result);
     this.setState({ 
       restaurant_menus: restaurant_menus.result ,
       //customer_orders: orders

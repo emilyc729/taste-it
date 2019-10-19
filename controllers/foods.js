@@ -11,7 +11,6 @@ module.exports = {
 
 
 async function getAllFoods(req, res) {
-  //console.log(req.user);
   const customer = await Customer.findById(req.user._id);
   const orders = customer.orders;
   orders.forEach(async function(oneOrder) {
@@ -24,7 +23,6 @@ async function getAllFoods(req, res) {
 }
 
 async function createFood(req, res) {
-  //console.log(req.user);
   const customer = await Customer.findById(req.user._id);
   const orders = customer.orders;
   orders.forEach(async function(oneOrder) {
@@ -32,8 +30,6 @@ async function createFood(req, res) {
       oneOrder.food_items.push(req.body);
       await customer.save();
       //returns updated food list
-      console.log('-------');
-      console.log(oneOrder.food_items);
       return res.json(oneOrder.food_items);
     }
   });
@@ -45,11 +41,9 @@ async function updateFood(req, res) {
   orders.forEach(function(oneOrder) {
     oneOrder.food_items.forEach(function(oneFood) {
       if(oneFood.id === req.params.id) {
-        console.log(oneFood.id);
         oneFood.quantity = req.body.quantity;
         customer.save();
         //return updated food list
-        console.log(oneOrder.food_items);
         return res.json(oneOrder.food_items);
       }
     });
@@ -57,34 +51,14 @@ async function updateFood(req, res) {
 }
 
 async function deleteFood(req, res) {
-  console.log(req.params.id);
-  console.log(req.body);
   const customer = await Customer.findById(req.user._id);
   const foodList = customer.orders[req.body.orderIdx].food_items;
   foodList.forEach(async function(food, idx) {
     if(req.params.id === food.id) {
       const deletedFood = foodList.splice(idx, 1);
-      console.log(deletedFood);
       customer.save();
+      //return deleted food
       return res.json(deletedFood);
     }
   });
-  
-  //customer.save();
- 
-  //return res.json(deleteFood);
-
-  // const customer = await Customer.findById(req.user._id);
-  // const orders = customer.orders;
-  // orders.forEach(function(oneOrder) {
-  //   oneOrder.food_items.forEach(function(oneFood, idx) {
-  //     if(oneFood.id === req.params.id) {
-  //       console.log(oneFood);
-  //       const deletedFood = oneOrder.food_items.splice(idx, 1);
-  //       console.log(deletedFood);
-  //       customer.save();
-  //       return res.json(deletedFood);
-  //     }
-  //   });
-  // });
 }

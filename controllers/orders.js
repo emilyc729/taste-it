@@ -14,7 +14,6 @@ async function index(req, res) {
 }
 
 async function create(req, res) {
-  //console.log(req.user);
   const customer = await Customer.findById(req.user._id);
   customer.orders.push(req.body);
   const saveCustomer = await customer.save();
@@ -23,12 +22,12 @@ async function create(req, res) {
 
 async function update(req, res) {
   const customer = await Customer.findById(req.user._id);
-  customer.orders.forEach(async function(order, idx) {
+  customer.orders.forEach(async function(order) {
     if(req.params.id === order.id) {
       order.total_price = req.body.total_price;
       order.total_items = req.body.total_items;
       await customer.save();
-      console.log(order);
+      //return one order
       res.json(order);
     }
   });
