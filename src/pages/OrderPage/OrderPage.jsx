@@ -81,6 +81,7 @@ class OrderPage extends Component {
     orderList[orderIdx] = updatedOrder;
 
     this.setState({ customer_orders: orderList });
+    alert('Your order is saved and submitted');
     console.log(this.state.customer_orders[orderIdx]);
 
   }
@@ -119,7 +120,7 @@ class OrderPage extends Component {
         <h1 className="text-center">Your Orders</h1>
         <div className="row">
 
-          {this.state.customer_orders.length ?
+          {this.state.customer_orders ?
 
             this.state.customer_orders.map((order, orderIdx) =>
 
@@ -212,8 +213,10 @@ class OrderPage extends Component {
 
             )
             :
-            <h5 className="text-center col-lg-12">You have no orders yet!</h5>
-
+            <div>
+              Loading...
+              <h5 className="text-center col-lg-12">You have no orders yet!</h5>
+            </div>                   
           }
         </div>
       </div>
