@@ -17,6 +17,7 @@ async function create(req, res) {
   const customer = await Customer.findById(req.user._id);
   customer.orders.push(req.body);
   const saveCustomer = await customer.save();
+  //return orders list
   return res.json(saveCustomer.orders);
 }
 
@@ -39,6 +40,7 @@ async function deleteOne(req, res) {
     if(req.params.id === order.id) {
       customer.orders.splice(idx, 1);
       const saveCustomer = await customer.save();
+      //return updated orders list
       return res.json(saveCustomer.orders);
     }
   });
