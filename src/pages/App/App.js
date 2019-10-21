@@ -58,7 +58,7 @@ class App extends Component {
                     </div>
                   )
                   :
-                  <div>Loading...</div>
+                  <section>Loading...</section>
                 }
               </div>
             </section>
