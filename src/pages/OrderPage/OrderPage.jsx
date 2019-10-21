@@ -81,7 +81,7 @@ class OrderPage extends Component {
     orderList[orderIdx] = updatedOrder;
 
     this.setState({ customer_orders: orderList });
-    alert('Your order is saved and submitted');
+    //alert('Your order is saved and submitted');
     console.log(this.state.customer_orders[orderIdx]);
 
   }
