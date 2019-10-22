@@ -33,10 +33,8 @@ Deployed Link: [Taste-It](https://ec-tasteit.herokuapp.com/)
 <br />
 Trello: [Trello](https://trello.com/b/w9PC3xgA/full-stack-project)
 
-
-## Unsolved Problems:
-- Need to fix user clicking add to order too quickly, will create cascade of orders for same menu
-- Minor fixes needed on updating order on 'add to order' btn click
+### Instructions
+- Please allow some time for the page to load, as Heroku takes some time
 
 ## Future Enhancements
 1. Add dialog box/notification of what the user just added to their order
