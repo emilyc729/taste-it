@@ -15,3 +15,8 @@
 .NavBar-welcome {
     color: grey;
 }
+
+
+.NavBar .button-size {
+    font-size: 1rem;
+}

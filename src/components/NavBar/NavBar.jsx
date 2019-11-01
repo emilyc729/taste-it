@@ -12,7 +12,7 @@ const NavBar = (props) => {
           <button className="btn btn-outline-success" id="navbarDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span className="fas fa-utensils"></span>
           </button>
-          <div className="dropdown-menu dropdown-menu-right mt-1" aria-labelledby="navbarDropdown">
+          <div className="dropdown-menu dropdown-menu-right mt-1 ml-auto" aria-labelledby="navbarDropdown">
             <h5 className="dropdown-item">Hi, {props.customer.name}</h5>
             <Link to='/orders' className="dropdown-item">View Orders</Link>
             <Link to='' className="dropdown-item">Restaurants</Link>
@@ -28,13 +28,13 @@ const NavBar = (props) => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse " id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link to='/login' className='nav-link'>Login</Link>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item mr-2">
+              <Link to='/login' className="btn btn-outline-info my-2 my-sm-0"><i className="button-size fas fa-sign-in-alt"></i> Login</Link>
             </li>
             <li className="nav-item">
-              <Link to='/signup' className='nav-link'>Sign Up</Link>
+              <Link to='/signup' className="btn btn-outline-info my-2 my-sm-0"><i className="button-size fas fa-user-plus"></i> Sign Up</Link>
             </li>
           </ul>
 
