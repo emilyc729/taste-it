@@ -30,11 +30,14 @@ const NavBar = (props) => {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
+          <li className="nav-item mr-2">
+              <Link to='/' className="nav-link">Restaurants</Link>
+            </li>
             <li className="nav-item mr-2">
-              <Link to='/login' className="btn btn-outline-info my-2 my-sm-0"><i className="button-size fas fa-sign-in-alt"></i> Login</Link>
+              <Link to='/login' className="nav-link"><i className="button-size fas fa-sign-in-alt"></i> Login</Link>
             </li>
             <li className="nav-item">
-              <Link to='/signup' className="btn btn-outline-info my-2 my-sm-0"><i className="button-size fas fa-user-plus"></i> Sign Up</Link>
+              <Link to='/signup' className="nav-link"><i className="button-size fas fa-user-plus"></i> Sign Up</Link>
             </li>
           </ul>
 
