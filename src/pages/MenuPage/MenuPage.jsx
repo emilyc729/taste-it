@@ -14,12 +14,14 @@ class MenuPage extends Component {
     }
 
     async componentDidMount() {
-        const customer_orders = await ordersApi.getAllOrders();
-        const order_foodList = await foodsApi.getAllFoods(this.props.match.params.id);
-        this.setState({
-            customer_orders: customer_orders,
-            order_foodList: order_foodList
-        });
+        if(this.props.customer) {
+            const customer_orders = await ordersApi.getAllOrders();
+            const order_foodList = await foodsApi.getAllFoods(this.props.match.params.id);
+            this.setState({
+                customer_orders: customer_orders,
+                order_foodList: order_foodList
+            });
+        }
     }
 
     //generate 10digit random order#
