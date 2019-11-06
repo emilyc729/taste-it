@@ -119,12 +119,8 @@ class OrderPage extends Component {
       <div className="OrderPage container">
         <h1 className="text-center">Your Orders</h1>
         <div className="row">
-
           {this.state.customer_orders ?
-
             this.state.customer_orders.map((order, orderIdx) =>
-
-
               <div key={order.order_num} className="col-sm-12 col-md-4 mt-3">
                 <div className="parent mb-4">
                   <button className="deleteButton btn btn-sm btn-outline-danger" onClick={() => this.handleDeleteOrder(order._id)} data-toggle="tooltip" data-placement="top" title="Delete Order"><i className="fas fa-times"></i></button>

@@ -32,6 +32,10 @@
     border: none;
 }
 
+.deleteButton {
+    font-size: 20px;
+}
+
 .deleteButton:hover {
     background-color: transparent;
     border: none;
@@ -70,4 +74,8 @@
 
 .OrderPage .modal-body {
     padding: 0 0.3rem 0.3rem 0.3rem;
+}
+
+.OrderPage .card-title {
+    margin-bottom: 0;
 }

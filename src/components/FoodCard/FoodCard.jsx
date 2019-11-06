@@ -38,9 +38,9 @@ class FoodCard extends Component {
                         {this.props.customer ? 
                             <div className="card-text text-center d-flex justify-content-around">
                                 <div>
-                                    <button className="btn numBtn" onClick={() => this.decrement()}><i className="far fa-minus-square"></i></button>
+                                    <button className="btn numBtn" onClick={() => this.decrement()}><i className="FoodCard-icons far fa-minus-square"></i></button>
                                     <input className="quantity" type="number" name="quantity" value={this.state.quantity} onChange={this.handleChange} />
-                                    <button className="btn numBtn" onClick={() => this.increment()}><i className="far fa-plus-square"></i></button>
+                                    <button className="btn numBtn" onClick={() => this.increment()}><i className="FoodCard-icons far fa-plus-square"></i></button>
                                 </div>
                                 <button className="btn-outline-primary btn-sm addOrderBtn"
                                     onClick={() => this.props.createOrderOrAddItem(this.props.food, this.state.quantity)}>Add to Order</button>
