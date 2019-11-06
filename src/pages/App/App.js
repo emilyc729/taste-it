@@ -9,15 +9,15 @@ import menuApi from '../../services/menus-api';
 import RestaurantCard from '../../components/RestaurantCard/RestaurantCard';
 import MenuPage from '../MenuPage/MenuPage';
 import OrderPage from  '../OrderPage/OrderPage';
+import SearchBar from '../../components/SearchBar/SearchBar';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
+ 
+    state = {
       restaurant_menus: [],
       customer: customerService.getCustomer()
-    };
-  }
+    }
+  
 
   async componentDidMount() {
     const restaurant_menus = await menuApi.getAllMenus();
@@ -51,6 +51,9 @@ class App extends Component {
           <Route exact path='/' render={() =>
             <section className="container">
               <div className="row">
+                <div className="col-md-12">
+                  <SearchBar />
+                </div>
                 {this.state.restaurant_menus ? 
                   this.state.restaurant_menus.map((restaurant, idx) =>
                     <div key={idx} className="col-md-4">
@@ -58,7 +61,7 @@ class App extends Component {
                     </div>
                   )
                   :
-                  <section>Loading...</section>
+                  <div className="col-md-12">Loading...</div>
                 }
               </div>
             </section>
