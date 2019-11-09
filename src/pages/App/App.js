@@ -12,10 +12,10 @@ import OrderPage from  '../OrderPage/OrderPage';
 import SearchBar from '../../components/SearchBar/SearchBar';
 
 class App extends Component {
- 
     state = {
       restaurant_menus: [],
-      customer: customerService.getCustomer()
+      customer: customerService.getCustomer(), 
+      search_keyword: '',
     }
   
 
@@ -36,6 +36,13 @@ class App extends Component {
     this.setState({ customer: null });
   }
 
+  handleSearch = (keyword) => {
+    this.state.restaurant_menus.filter((restaurant) => {
+      return restaurant.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
+    });
+
+  }
+
   render() {
     return (
       <div className="App">
@@ -52,7 +59,10 @@ class App extends Component {
             <section className="container">
               <div className="row">
                 <div className="col-md-12">
-                  <SearchBar />
+                  <SearchBar 
+                    handleSearch={this.handleSearch}
+                    search_keyword={this.state.search_keyword}
+                  />
                 </div>
                 {this.state.restaurant_menus ? 
                   this.state.restaurant_menus.map((restaurant, idx) =>

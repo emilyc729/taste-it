@@ -125,14 +125,14 @@ class OrderPage extends Component {
                 <div className="parent mb-4">
                   <button className="deleteButton btn btn-sm btn-outline-danger" onClick={() => this.handleDeleteOrder(order._id)} data-toggle="tooltip" data-placement="top" title="Delete Order"><i className="fas fa-times"></i></button>
                 
-                  <div className="card" data-toggle="modal" data-target={`.${order.name}${order.order_num}`}>
+                  <div className="card" data-toggle="modal" data-target={`.${order.restaurant_name}${order.order_num}`}>
                     <div className="card-body">
                       <h6 className="card-title">{order.restaurant_name} Order</h6>
                     </div>
                   </div>
                 </div>
 
-                <div className={`modal fade ${order.name}${order.order_num}`} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div className={`modal fade ${order.restaurant_name}${order.order_num}`} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                   <div className="modal-dialog modal-lg" role="document">
                     <div className="modal-content">
                       <div className="modal-header">
