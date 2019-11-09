@@ -42,8 +42,20 @@ class FoodCard extends Component {
                                     <input className="quantity" type="number" name="quantity" value={this.state.quantity} onChange={this.handleChange} />
                                     <button className="btn numBtn" onClick={() => this.increment()}><i className="FoodCard-icons far fa-plus-square"></i></button>
                                 </div>
-                                <button className="btn-outline-primary btn-sm addOrderBtn"
-                                    onClick={() => this.props.createOrderOrAddItem(this.props.food, this.state.quantity)}>Add to Order</button>
+                                <button className="btn-outline-primary btn-sm addOrderBtn" data-toggle="modal" data-target={`.addToOrderDialog${this.props.food.id}`}
+                                    onClick={() => this.props.createOrderOrAddItem(this.props.food, this.state.quantity)}>Add to Order
+                                </button>
+                                <div className={`modal fade addToOrderDialog${this.props.food.id}`} tabIndex="-1" role="dialog">
+                                <div className="modal-dialog modal-sm">
+                                    <div className="modal-content">
+                                        <p>Added {this.state.quantity} {this.props.food.name} to order</p>
+                              
+                                    </div>
+                                </div>
+                                </div>
+                                
+
+                             
                             </div>
                             :
                             <div></div>
