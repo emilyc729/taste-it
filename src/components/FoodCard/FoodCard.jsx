@@ -48,7 +48,7 @@ class FoodCard extends Component {
                                 <div className={`modal fade addToOrderDialog${this.props.food.id}`} tabIndex="-1" role="dialog">
                                 <div className="modal-dialog modal-sm">
                                     <div className="modal-content">
-                                        <p>Added {this.state.quantity} {this.props.food.name} to order</p>
+                                        <p>Added {this.state.quantity} {this.props.food.name} to {this.props.restaurant.name} order</p>
                               
                                     </div>
                                 </div>
