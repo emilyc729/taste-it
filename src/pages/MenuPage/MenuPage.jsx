@@ -142,18 +142,17 @@ class MenuPage extends Component {
                         categorySelected={this.state.categorySelected}
                         handleSelection={this.handleSelection}
                     />
-                    
                 </div>
                 <div className="col-md-10">
                 {this.props.restaurant.menus.map((menu, idx) => 
                     <div key={idx}>
-                    <Menu
-                        {...this.props} 
-                        categories={menu.categories}
-                        customer={this.props.customer}
-                        categorySelected={this.state.categorySelected}
-                        createOrderOrAddItem={this.createOrderOrAddItem}
-                    />
+                        <Menu
+                            {...this.props} 
+                            categories={menu.categories}
+                            customer={this.props.customer}
+                            categorySelected={this.state.categorySelected}
+                            createOrderOrAddItem={this.createOrderOrAddItem}
+                        />
                     </div>
                 )}
                 </div>
